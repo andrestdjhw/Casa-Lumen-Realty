@@ -1,2 +1,129 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* Paleta preliminar (brief §15): navy como base, carbón y dorado como acento.
+   Ajustar cuando llegue el brand kit final. */
+@theme {
+  /* Branding: Libre Baskerville = tipografía de inscripción (titulares, cifras, frases de marca;
+     nunca párrafos largos). Albert Sans = tipografía institucional. */
+  --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-sans: "Albert Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #1d1d1f;
+  --color-navy-900: #16213a;
+  --color-navy-800: #1f2d4d;
+  --color-navy-700: #2a3b61;
+  --color-gold-300: #d4b88f;
+  --color-gold-500: #a8814f;
+  --color-gold-600: #8a6639;
+  --color-cream-50: #fbf9f5;
+  --color-cream-100: #f5f1ea;
+  --color-cream-200: #ebe4d8;
+  --color-bronze-700: #6f5538;
+  --color-bronze-800: #5e472f;
+}
+
+@layer base {
+  body {
+    @apply bg-cream-50 font-sans text-ink antialiased;
+  }
+
+  /* Con sesión iniciada, el header pegajoso queda bajo la barra de administración de
+     WordPress (fija: 32px escritorio, 46px tablet; en ≤600px deja de ser fija). */
+  .admin-bar #clr-navbar {
+    top: 32px;
+  }
+
+  @media screen and (max-width: 782px) {
+    .admin-bar #clr-navbar {
+      top: 46px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .admin-bar #clr-navbar {
+      top: 0;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.22em] text-gold-600 uppercase;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-navy-900 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-navy-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500 bg-white/60 px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-gold-600 transition-colors hover:text-navy-900;
+  }
+
+  /* "A plena luz": un plano sólido que se apoya, con su sombra dura rayada (la del isotipo).
+     El .plane no lleva fondo; el fondo va en su hijo para que el rayado quede detrás. */
+  .plane {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .plane::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translate(10px, 10px);
+    background: repeating-linear-gradient(-45deg, var(--plane-hatch, color-mix(in srgb, var(--color-navy-900) 35%, transparent)) 0 1px, transparent 1px 7px);
+    transition: transform 0.35s ease;
+  }
+
+  /* Variante para secciones oscuras. */
+  .plane-light {
+    --plane-hatch: rgb(255 255 255 / 0.3);
+  }
+
+  /* Tarjeta 3D: al pasar el cursor se inclina hacia el puntero (src/cardTilt.js fija
+     --rx/--ry) y se levanta; su sombra rayada se aleja para dar profundidad. */
+  .card3d {
+    transition: transform 0.35s ease;
+    will-change: transform;
+  }
+
+  .card3d:hover,
+  .card3d:focus-within {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(-5px, -6px, 0);
+  }
+
+  .card3d.is-tilting {
+    transition-duration: 0.12s;
+  }
+
+  .plane.card3d:hover::before,
+  .plane.card3d:focus-within::before {
+    transform: translate(18px, 20px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card3d,
+    .plane::before {
+      transition: none;
+    }
+
+    .card3d:hover,
+    .card3d:focus-within {
+      transform: none;
+    }
+  }
+
+  /* Regla de cotas: línea base con marcas, del lenguaje técnico de la arquitectura. */
+  .ruler {
+    height: 7px;
+    background:
+      linear-gradient(currentColor, currentColor) bottom / 100% 1px no-repeat,
+      repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 22px) bottom / 100% 7px no-repeat;
+  }
+}
