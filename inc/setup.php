@@ -6,7 +6,7 @@
  * /property-management/ no se crea: es condicional (brief §07).
  */
 
-const CLR_PAGES_VERSION = '1';
+const CLR_PAGES_VERSION = '2';
 
 function clr_ensure_pages() {
   if (get_option('clr_pages_version') === CLR_PAGES_VERSION) {
@@ -21,10 +21,17 @@ function clr_ensure_pages() {
     'areas'   => 'Areas',
     'faq'     => 'FAQ',
     'contact' => 'Contact',
+    'privacy-policy'       => 'Privacy Policy',
+    'terms-and-conditions' => 'Terms & Conditions',
   );
 
   foreach ($pages as $slug => $title) {
-    if (!get_page_by_path($slug)) {
+    $existing = get_page_by_path($slug);
+    // WordPress crea su propia "Privacy Policy" en borrador; se publica en lugar de duplicarla.
+    if ($existing && $existing->post_status !== 'publish') {
+      wp_update_post(array('ID' => $existing->ID, 'post_status' => 'publish', 'post_title' => $title));
+    }
+    if (!$existing) {
       wp_insert_post(array(
         'post_type'   => 'page',
         'post_status' => 'publish',

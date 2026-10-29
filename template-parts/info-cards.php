@@ -13,7 +13,7 @@
 $items = $args['items'];
 ?>
 <section class="<?php echo esc_attr($args['class'] ?? 'bg-cream-100'); ?> py-20 lg:py-24">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+  <div class="mx-auto max-w-site px-4 sm:px-6">
     <?php if (!empty($args['title'])) { ?>
       <div class="mb-14 max-w-2xl">
         <p class="eyebrow"><?php echo esc_html($args['eyebrow']); ?></p>

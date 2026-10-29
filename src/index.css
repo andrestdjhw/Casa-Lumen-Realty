@@ -9,6 +9,9 @@
   --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
   --font-sans: "Albert Sans", ui-sans-serif, system-ui, sans-serif;
 
+  /* Ancho máximo del contenido del sitio (clase max-w-site). */
+  --container-site: 85.375rem;
+
   --color-ink: #1d1d1f;
   --color-navy-900: #16213a;
   --color-navy-800: #1f2d4d;
@@ -27,23 +30,24 @@
   body {
     @apply bg-cream-50 font-sans text-ink antialiased;
   }
+}
 
-  /* Con sesión iniciada, el header pegajoso queda bajo la barra de administración de
-     WordPress (fija: 32px escritorio, 46px tablet; en ≤600px deja de ser fija). */
+/* Con sesión iniciada, el header pegajoso queda bajo la barra de administración de
+   WordPress (fija: 32px escritorio, 46px tablet; en ≤600px deja de ser fija).
+   Va fuera de @layer para ganarle a la utilidad top-0 del header. */
+.admin-bar #clr-navbar {
+  top: 32px;
+}
+
+@media screen and (max-width: 782px) {
   .admin-bar #clr-navbar {
-    top: 32px;
+    top: 46px;
   }
+}
 
-  @media screen and (max-width: 782px) {
-    .admin-bar #clr-navbar {
-      top: 46px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .admin-bar #clr-navbar {
-      top: 0;
-    }
+@media screen and (max-width: 600px) {
+  .admin-bar #clr-navbar {
+    top: 0;
   }
 }
 

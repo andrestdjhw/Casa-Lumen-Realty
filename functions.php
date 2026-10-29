@@ -1,5 +1,6 @@
 <?php
 
+require get_theme_file_path('inc/i18n.php');
 require get_theme_file_path('inc/site-data.php');
 require get_theme_file_path('inc/helpers.php');
 require get_theme_file_path('inc/brand.php');

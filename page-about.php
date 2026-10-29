@@ -17,11 +17,11 @@ get_header(); ?>
     'intro'     => __('Casa Lumen Realty is built around the belief that real estate decisions deserve time, clarity, and honest conversations. Our focus is helping clients understand the process and make decisions that fit their goals.', 'casa-lumen'),
     'image'     => 'about-interior.jpg',
     'cta_label' => __('Connect With Casa Lumen', 'casa-lumen'),
-    'cta_href'  => home_url('/contact/'),
+    'cta_href'  => clr_url('/contact/'),
   )); ?>
 
   <section class="bg-cream-100 py-20 lg:py-24">
-    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
+    <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
       <div class="plane">
         <div class="relative aspect-[4/5] bg-white">
           <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza', 'casa-lumen'), 'absolute inset-0 size-full object-cover'); ?>
@@ -47,7 +47,7 @@ get_header(); ?>
   </section>
 
   <section class="bg-cream-50 py-20 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
       <div class="max-w-2xl">
         <p class="eyebrow"><?php esc_html_e('Our values', 'casa-lumen'); ?></p>
         <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php esc_html_e('How we work, before, during, and after the sale.', 'casa-lumen'); ?></h2>

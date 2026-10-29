@@ -16,13 +16,14 @@ $site  = clr_site();
 $image = $args['image'] ?? '';
 ?>
 <section class="relative overflow-hidden bg-cream-200">
-  <div class="mx-auto grid max-w-7xl <?php echo $image ? 'lg:grid-cols-[1fr_0.9fr]' : ''; ?>">
+  <div class="mx-auto grid max-w-site <?php echo $image ? 'lg:grid-cols-[1fr_0.9fr]' : ''; ?>">
     <div class="px-4 pt-10 pb-16 sm:px-6 lg:pt-14 lg:pb-24 <?php echo $image ? 'lg:pr-12' : 'max-w-4xl'; ?>">
       <nav aria-label="<?php esc_attr_e('Breadcrumb', 'casa-lumen'); ?>" class="text-xs text-ink/55">
         <ol class="flex items-center gap-2">
-          <li><a href="<?php echo esc_url(home_url('/')); ?>" class="hover:text-gold-600"><?php esc_html_e('Home', 'casa-lumen'); ?></a></li>
+          <li><a href="<?php echo esc_url(clr_url('/')); ?>" class="hover:text-gold-600"><?php esc_html_e('Home', 'casa-lumen'); ?></a></li>
           <li aria-hidden="true">/</li>
-          <li aria-current="page" class="text-ink/80"><?php echo esc_html(get_the_title()); ?></li>
+          <li aria-current="page" class="text-ink/80"><?php // Los títulos de las páginas se traducen con el mismo archivo del tema.
+          echo esc_html(__(get_post_field('post_title', get_queried_object_id()), 'casa-lumen')); ?></li>
         </ol>
       </nav>
 
@@ -47,7 +48,7 @@ $image = $args['image'] ?? '';
 
     <?php if ($image) { ?>
       <div class="relative h-80 sm:h-[26rem] lg:h-auto">
-        <div class="absolute inset-0 lg:right-[min(0px,calc((80rem-100vw)/2))]">
+        <div class="absolute inset-0 lg:right-[min(0px,calc((var(--container-site)-100vw)/2))]">
           <?php echo clr_image($image, '', 'size-full object-cover', true); ?>
         </div>
       </div>

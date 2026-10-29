@@ -12,8 +12,8 @@
     <header id="clr-navbar" class="pointer-events-none sticky top-0 z-50">
       <div class="h-10 bg-navy-900"></div>
       <div class="pointer-events-auto bg-cream-50">
-        <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6" aria-label="Primary">
-          <a href="<?php echo esc_url(home_url('/')); ?>" class="font-serif text-xl">Casa Lumen Realty</a>
+        <nav class="mx-auto flex h-20 max-w-site items-center justify-between gap-6 px-4 sm:px-6" aria-label="Primary">
+          <a href="<?php echo esc_url(clr_url('/')); ?>" class="font-serif text-xl">Casa Lumen Realty</a>
           <ul class="hidden gap-5 text-[15.6px] font-medium xl:gap-7 text-ink/80 lg:flex">
             <?php foreach (clr_nav() as $item) {
               foreach ($item['children'] ?? array($item) as $link) { ?>

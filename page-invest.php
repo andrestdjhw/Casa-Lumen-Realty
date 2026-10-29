@@ -54,7 +54,7 @@ get_header(); ?>
     'eyebrow' => __('Have more questions?', 'casa-lumen'),
     'body'    => __('Start with the answers to common questions, then reach out when you are ready.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
-    'href'    => home_url('/faq/'),
+    'href'    => clr_url('/faq/'),
     'image'   => 'area-converse.jpg',
   )); ?>
 </main>

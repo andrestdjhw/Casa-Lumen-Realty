@@ -30,7 +30,7 @@ get_header(); ?>
   )); ?>
 
   <section class="bg-cream-50 py-20 lg:py-24">
-    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
+    <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
       <div>
         <p class="eyebrow"><?php esc_html_e('Seller education', 'casa-lumen'); ?></p>
         <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php esc_html_e('What could affect your sale?', 'casa-lumen'); ?></h2>
@@ -73,7 +73,7 @@ get_header(); ?>
     'eyebrow' => __('Not ready to list yet?', 'casa-lumen'),
     'body'    => __('A conversation now can help you plan repairs, timing, and next steps before you decide.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
-    'href'    => home_url('/faq/'),
+    'href'    => clr_url('/faq/'),
   )); ?>
 </main>
 

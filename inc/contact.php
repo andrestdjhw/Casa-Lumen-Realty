@@ -66,7 +66,7 @@ function clr_contact_js_config() {
       'select'        => __('Select…', 'casa-lumen'),
       'consent'       => __('I agree to be contacted by Casa Lumen Realty about my inquiry and accept the', 'casa-lumen'),
       'privacy'       => __('Privacy Policy', 'casa-lumen'),
-      'privacyUrl'    => home_url('/privacy-policy/'),
+      'privacyUrl'    => clr_url('/privacy-policy/'),
       'submit'        => __('Send My Message', 'casa-lumen'),
       'sending'       => __('Sending…', 'casa-lumen'),
       'required'      => __('This field is required.', 'casa-lumen'),

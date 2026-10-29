@@ -16,7 +16,7 @@ function clr_site() {
     'mapsEmbed'   => 'https://www.google.com/maps?q=' . rawurlencode('13327 Nacogdoches Rd, Unit 1, San Antonio, TX 78217') . '&output=embed',
     'facebook'    => 'https://www.facebook.com/yolandabarbozarealtor/',
     'googleProfile' => 'https://share.google/ydGao7QE3CUY2N1P5',
-    'contactUrl'  => home_url('/contact/'),
+    'contactUrl'  => clr_url('/contact/'),
   );
 }
 
@@ -56,34 +56,34 @@ function clr_socials() {
 
 function clr_nav() {
   return array(
-    array('label' => __('Home', 'casa-lumen'), 'url' => home_url('/')),
+    array('label' => __('Home', 'casa-lumen'), 'url' => clr_url('/')),
     array(
       'label'    => __('Services', 'casa-lumen'),
       'children' => array(
         array(
           'label'       => __('Buy a Home', 'casa-lumen'),
-          'url'         => home_url('/buy/'),
+          'url'         => clr_url('/buy/'),
           'icon'        => 'home',
           'description' => __('Explore the process, understand your priorities, and make informed decisions.', 'casa-lumen'),
         ),
         array(
           'label'       => __('Sell Your Home', 'casa-lumen'),
-          'url'         => home_url('/sell/'),
+          'url'         => clr_url('/sell/'),
           'icon'        => 'key',
           'description' => __('Start with a pricing conversation and a plan tailored to your property.', 'casa-lumen'),
         ),
         array(
           'label'       => __('Invest in Real Estate', 'casa-lumen'),
-          'url'         => home_url('/invest/'),
+          'url'         => clr_url('/invest/'),
           'icon'        => 'chart',
           'description' => __('Discuss your goals, timelines, and property criteria.', 'casa-lumen'),
         ),
       ),
     ),
-    array('label' => __('About', 'casa-lumen'), 'url' => home_url('/about/')),
-    array('label' => __('Areas', 'casa-lumen'), 'url' => home_url('/areas/')),
-    array('label' => __('Resources', 'casa-lumen'), 'url' => home_url('/faq/')),
-    array('label' => __('Contact', 'casa-lumen'), 'url' => home_url('/contact/')),
+    array('label' => __('About', 'casa-lumen'), 'url' => clr_url('/about/')),
+    array('label' => __('Areas', 'casa-lumen'), 'url' => clr_url('/areas/')),
+    array('label' => __('Resources', 'casa-lumen'), 'url' => clr_url('/faq/')),
+    array('label' => __('Contact', 'casa-lumen'), 'url' => clr_url('/contact/')),
   );
 }
 
@@ -92,17 +92,16 @@ function clr_legal_links() {
   // Services" (IABS, llenado por el broker) y al "Consumer Protection Notice".
   // Agregarlos aquí cuando Yolanda entregue el IABS y se confirme la licencia.
   return array(
-    array('label' => __('Privacy Policy', 'casa-lumen'), 'url' => home_url('/privacy-policy/')),
-    array('label' => __('Terms of Use', 'casa-lumen'), 'url' => home_url('/terms/')),
-    array('label' => __('Accessibility', 'casa-lumen'), 'url' => home_url('/accessibility/')),
+    array('label' => __('Privacy Policy', 'casa-lumen'), 'url' => clr_url('/privacy-policy/')),
+    array('label' => __('Terms & Conditions', 'casa-lumen'), 'url' => clr_url('/terms-and-conditions/')),
   );
 }
 
 /** Configuración que reciben Navbar y Footer. */
 function clr_js_config() {
   return array(
-    'homeUrl' => home_url('/'),
-    'lang'    => strpos(determine_locale(), 'es') === 0 ? 'es' : 'en',
+    'homeUrl' => clr_url('/'),
+    'lang'    => clr_lang(),
     'site'    => clr_site(),
     'form'    => clr_contact_js_config(),
     'nav'     => clr_nav(),
@@ -110,13 +109,14 @@ function clr_js_config() {
     // La página de contacto ya tiene su mapa grande.
     'footerMap' => !is_page('contact'),
     'legal'   => clr_legal_links(),
-    // TODO: conectar con el plugin de idiomas (Polylang/WPML) cuando se defina.
+    // Switch EN | ES: la misma página en el otro idioma (inc/i18n.php).
     'languages' => array(
-      array('code' => 'EN', 'url' => home_url('/'), 'current' => true),
-      array('code' => 'ES', 'url' => home_url('/es/'), 'current' => false),
+      array('code' => 'EN', 'label' => 'English', 'lang' => 'en', 'url' => clr_lang_urls()['en'], 'current' => clr_lang() === 'en'),
+      array('code' => 'ES', 'label' => 'Español', 'lang' => 'es', 'url' => clr_lang_urls()['es'], 'current' => clr_lang() === 'es'),
     ),
     'i18n' => array(
       'cta'          => __('Schedule a Consultation', 'casa-lumen'),
+      'call'         => __('Call', 'casa-lumen'),
       'menu'         => __('Menu', 'casa-lumen'),
       'close'        => __('Close menu', 'casa-lumen'),
       'megaEyebrow'  => __('Not sure where to start?', 'casa-lumen'),
@@ -130,6 +130,9 @@ function clr_js_config() {
       'openInMaps'   => __('Open in Google Maps', 'casa-lumen'),
       'social'       => __('Social media', 'casa-lumen'),
       'rights'       => __('All rights reserved.', 'casa-lumen'),
+      // Crédito de la agencia: texto fijo, igual en ambos idiomas.
+      'credit'       => 'Crafted by 828 Marketing Solutions',
+      'creditUrl'    => 'https://828marketingsolutions.com',
       // Arquitectura de marca: respaldo discreto, solo texto.
       'family'       => __('Part of the Lumen family', 'casa-lumen'),
       'equalHousing' => __('Equal Housing Opportunity', 'casa-lumen'),

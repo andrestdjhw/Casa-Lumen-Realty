@@ -18,7 +18,7 @@ get_header(); ?>
   )); ?>
 
   <section id="lead" class="scroll-mt-28 bg-cream-100 py-20 lg:py-24">
-    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
       <div>
         <h2 class="font-serif text-3xl text-ink"><?php esc_html_e('Contact information', 'casa-lumen'); ?></h2>
         <span class="ruler mt-6 block max-w-xs text-gold-500" aria-hidden="true"></span>

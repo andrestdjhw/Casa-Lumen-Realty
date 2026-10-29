@@ -6,7 +6,7 @@ import Icon from "./Icon"
 function TopBar({ site, socials, i18n }) {
   return (
     <div className="bg-navy-900 text-xs text-white/80">
-      <div className="mx-auto flex h-10 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-10 max-w-site items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-5 lg:flex-1">
           <a href={site.phoneHref} className="flex items-center gap-2 transition-colors hover:text-white">
             <Icon name="phone" className="size-3.5 text-gold-300" />

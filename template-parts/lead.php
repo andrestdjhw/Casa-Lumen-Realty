@@ -18,7 +18,7 @@
 $site = clr_site();
 ?>
 <section id="lead" class="scroll-mt-28 bg-cream-200 py-20 lg:py-24">
-  <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+  <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
     <div>
       <p class="eyebrow"><?php echo esc_html($args['eyebrow']); ?></p>
       <h2 class="mt-4 font-serif text-4xl leading-tight text-ink"><?php echo esc_html($args['title']); ?></h2>

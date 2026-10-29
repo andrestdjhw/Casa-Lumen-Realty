@@ -44,12 +44,12 @@ get_header(); ?>
   )); ?>
 
   <section class="bg-cream-100 py-20 lg:py-24">
-    <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+    <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
       <div>
         <p class="font-serif text-3xl leading-snug text-ink"><?php esc_html_e('There are no basic questions.', 'casa-lumen'); ?></p>
         <span class="ruler mt-6 block max-w-xs text-gold-500" aria-hidden="true"></span>
         <p class="mt-6 leading-relaxed text-ink/70"><?php esc_html_e('Don’t see yours? Ask it. Questions don’t expire.', 'casa-lumen'); ?></p>
-        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn-primary mt-8">
+        <a href="<?php echo esc_url(clr_url('/contact/')); ?>" class="btn-primary mt-8">
           <?php esc_html_e('Ask a Question', 'casa-lumen'); ?>
           <?php echo clr_icon('arrow-right', 'size-4'); ?>
         </a>

@@ -65,7 +65,7 @@ get_header(); ?>
     'eyebrow' => __('Still exploring?', 'casa-lumen'),
     'body'    => __('Start years before you are ready, or start today. You set the pace.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
-    'href'    => home_url('/faq/'),
+    'href'    => clr_url('/faq/'),
     'image'   => 'service-relocate.jpg',
   )); ?>
 </main>

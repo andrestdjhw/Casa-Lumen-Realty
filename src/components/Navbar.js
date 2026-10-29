@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react"
 import Logo from "./Logo"
 import Icon from "./Icon"
 import TopBar from "./TopBar"
+import FloatingCall from "./FloatingCall"
 
 function isActive(item) {
   if (item.children) return item.children.some(isActive)
   const path = new URL(item.url, window.location.origin).pathname
   const current = window.location.pathname
-  return path === "/" ? current === "/" : current.startsWith(path)
+  // El inicio ("/" o "/es/") solo está activo en sí mismo, no en sus subpáginas.
+  const isHome = /^\/(es\/?)?$/.test(path)
+  return isHome ? current.replace(/\/$/, "") === path.replace(/\/$/, "") : current.startsWith(path)
 }
 
 // Panel desplegable de escritorio: se abre con hover o clic y se cierra con Escape,
@@ -60,24 +63,27 @@ function MegaMenu({ item, site, i18n }) {
       </button>
 
       <div id={panelId} hidden={!open} className="absolute inset-x-0 top-full border-t border-cream-200 bg-cream-50 shadow-[0_24px_40px_-24px_rgba(22,33,58,0.35)]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[1fr_1fr_1fr_1.15fr]">
+        <div className="mx-auto grid max-w-site gap-8 px-6 py-8 lg:grid-cols-[1fr_1fr_1fr_1.15fr]">
           {item.children.map(child => (
             <a
               key={child.url}
               href={child.url}
               aria-current={isActive(child) ? "page" : undefined}
-              className="group rounded-sm p-4 transition-colors hover:bg-white focus-visible:bg-white"
+              // Mismo plano 3D que las tarjetas de servicios (clases plane + card3d).
+              className="group plane card3d block"
             >
-              <span className="flex size-12 items-center justify-center rounded-full bg-white text-gold-500 ring-1 ring-cream-200 group-hover:ring-gold-300">
-                <Icon name={child.icon} className="size-6" />
+              <span className="block h-full bg-white p-6">
+                <span className="flex size-12 items-center justify-center text-gold-500 ring-1 ring-cream-200 group-hover:ring-gold-300">
+                  <Icon name={child.icon} className="size-6" />
+                </span>
+                <span className="mt-4 block font-serif text-xl text-ink">{child.label}</span>
+                <span className="mt-2 block text-sm leading-relaxed font-normal text-ink/65">{child.description}</span>
+                <Icon name="arrow-right" className="mt-4 size-4 text-gold-600 transition-transform group-hover:translate-x-1" />
               </span>
-              <span className="mt-4 block font-serif text-xl text-ink">{child.label}</span>
-              <span className="mt-2 block text-sm leading-relaxed font-normal text-ink/65">{child.description}</span>
-              <Icon name="arrow-right" className="mt-4 size-4 text-gold-600 transition-transform group-hover:translate-x-1" />
             </a>
           ))}
 
-          <div className="rounded-sm bg-navy-900 p-6 text-white">
+          <div className="bg-navy-900 p-6 text-white">
             <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-300 uppercase">{i18n.megaEyebrow}</p>
             <p className="mt-3 font-serif text-2xl leading-snug">{i18n.megaTitle}</p>
             <p className="mt-2 text-sm leading-relaxed font-normal text-white/70">{i18n.megaText}</p>
@@ -157,9 +163,11 @@ function Navbar({ config }) {
   return (
     <div className={`pointer-events-auto transition-transform duration-300 ease-out motion-reduce:transition-none ${topBarHidden && !open ? "-translate-y-10" : ""}`}>
       <TopBar site={site} socials={socials} i18n={i18n} />
+      {/* El teléfono vive en la TopBar; cuando esta se oculta, aparece el botón flotante. */}
+      <FloatingCall site={site} i18n={i18n} visible={topBarHidden && !open} />
 
       <div className={`relative bg-cream-50/95 backdrop-blur transition-shadow ${scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-12px_rgba(0,0,0,0.12)]" : ""}`}>
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-20 max-w-site items-center justify-between gap-6 px-4 sm:px-6">
         <a href={homeUrl} aria-label={site.name} className="shrink-0">
           <Logo />
         </a>
@@ -190,19 +198,21 @@ function Navbar({ config }) {
             {languages.map((lang, i) => (
               <React.Fragment key={lang.code}>
                 {i > 0 && <span className="text-ink/30">|</span>}
-                <a href={lang.url} aria-current={lang.current ? "true" : undefined} className={lang.current ? "text-ink" : "text-ink/45 hover:text-ink"}>
+                <a
+                  href={lang.url}
+                  hrefLang={lang.lang}
+                  lang={lang.lang}
+                  aria-label={lang.label}
+                  aria-current={lang.current ? "true" : undefined}
+                  className={lang.current ? "text-ink" : "text-ink/45 hover:text-ink"}
+                >
                   {lang.code}
                 </a>
               </React.Fragment>
             ))}
           </div>
 
-          <a href={site.phoneHref} className="hidden items-center gap-2 text-sm font-semibold text-ink xl:flex">
-            <Icon name="phone" className="size-4 text-gold-600" />
-            {site.phone}
-          </a>
-
-          <a href={site.contactUrl} className="btn-primary hidden py-2.5! md:inline-flex">
+          <a href={site.contactUrl} className="btn-primary hidden py-3.5! md:inline-flex">
             {i18n.cta}
             <Icon name="arrow-right" className="size-4" />
           </a>
@@ -223,7 +233,7 @@ function Navbar({ config }) {
 
       {open && (
         <nav id="clr-mobile-menu" aria-label="Mobile" className="max-h-[calc(100dvh-7.5rem)] overflow-y-auto border-t border-cream-200 bg-cream-50 lg:hidden">
-          <ul className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+          <ul className="mx-auto max-w-site px-4 py-4 sm:px-6">
             {nav.map(item =>
               item.children ? (
                 <MobileGroup key={item.label} item={item} />
@@ -240,7 +250,7 @@ function Navbar({ config }) {
               )
             )}
           </ul>
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-6 sm:px-6">
+          <div className="mx-auto flex max-w-site flex-col gap-3 px-4 pb-6 sm:px-6">
             <a href={site.contactUrl} className="btn-primary">
               {i18n.cta}
               <Icon name="arrow-right" className="size-4" />
@@ -251,8 +261,15 @@ function Navbar({ config }) {
             </a>
             <div className="flex justify-center gap-3 pt-2 text-sm font-semibold sm:hidden">
               {languages.map(lang => (
-                <a key={lang.code} href={lang.url} className={lang.current ? "text-ink" : "text-ink/45"}>
-                  {lang.code}
+                <a
+                  key={lang.code}
+                  href={lang.url}
+                  hrefLang={lang.lang}
+                  lang={lang.lang}
+                  aria-current={lang.current ? "true" : undefined}
+                  className={lang.current ? "text-ink" : "text-ink/45"}
+                >
+                  {lang.label}
                 </a>
               ))}
             </div>

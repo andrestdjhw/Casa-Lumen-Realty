@@ -12,7 +12,7 @@ $services = array(
     'title' => __('Buy a Home', 'casa-lumen'),
     'text'  => __('Explore the process, understand your priorities, and make informed decisions.', 'casa-lumen'),
     'link'  => __('Learn About Buying', 'casa-lumen'),
-    'url'   => home_url('/buy/'),
+    'url'   => clr_url('/buy/'),
   ),
   array(
     'icon'  => 'key',
@@ -20,7 +20,7 @@ $services = array(
     'title' => __('Sell Your Home', 'casa-lumen'),
     'text'  => __('Start with a pricing conversation and a plan tailored to your property.', 'casa-lumen'),
     'link'  => __('Learn About Selling', 'casa-lumen'),
-    'url'   => home_url('/sell/'),
+    'url'   => clr_url('/sell/'),
   ),
   array(
     'icon'  => 'chart',
@@ -28,7 +28,7 @@ $services = array(
     'title' => __('Invest in Real Estate', 'casa-lumen'),
     'text'  => __('Discuss your goals, timelines, and property criteria.', 'casa-lumen'),
     'link'  => __('Learn About Investing', 'casa-lumen'),
-    'url'   => home_url('/invest/'),
+    'url'   => clr_url('/invest/'),
   ),
   array(
     'icon'  => 'map-pin',
@@ -36,7 +36,7 @@ $services = array(
     'title' => __('Relocate to San Antonio', 'casa-lumen'),
     'text'  => __('Talk through location preferences, commute priorities, lifestyle needs, and your timeline.', 'casa-lumen'),
     'link'  => __('Explore Relocation', 'casa-lumen'),
-    'url'   => home_url('/buy/#relocation'),
+    'url'   => clr_url('/buy/#relocation'),
   ),
 );
 
@@ -63,7 +63,7 @@ get_header(); ?>
 
   <!-- Hero -->
   <section class="relative overflow-hidden bg-cream-200">
-    <div class="mx-auto grid max-w-7xl lg:grid-cols-[1fr_1.05fr]">
+    <div class="mx-auto grid max-w-site lg:grid-cols-[1fr_1.05fr]">
       <div class="px-4 pt-12 pb-14 sm:px-6 sm:pt-16 lg:py-24 lg:pr-10">
         <p class="eyebrow"><?php esc_html_e('San Antonio real estate · Out in the open', 'casa-lumen'); ?></p>
         <h1 class="mt-6 font-serif text-[2.6rem] leading-[1.12] text-ink sm:text-[3.5rem] xl:text-[4rem]">
@@ -92,13 +92,16 @@ get_header(); ?>
       </div>
 
       <div class="relative lg:min-h-[720px]">
-        <div class="relative h-[420px] sm:h-[520px] lg:absolute lg:inset-y-0 lg:left-0 lg:right-[min(0px,calc((80rem-100vw)/2))] lg:h-auto">
+        <div class="relative h-[420px] sm:h-[520px] lg:absolute lg:inset-y-0 lg:left-0 lg:right-[min(0px,calc((var(--container-site)-100vw)/2))] lg:h-auto">
           <?php echo clr_image('hero-yolanda.jpg', __('Yolanda H. Barboza, Casa Lumen Realty', 'casa-lumen'), 'size-full object-cover object-top', true); ?>
+          <!-- Overlay navy de la paleta -->
+          <div class="absolute inset-0 bg-navy-900/55" aria-hidden="true"></div>
         </div>
 
-        <div id="consultation" class="plane z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-6 md:absolute md:top-1/2 md:right-8 md:m-0 md:w-[400px] md:-translate-y-1/2">
+        <!-- Formulario translúcido (sin la sombra rayada: se vería a través del vidrio). -->
+        <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-6 md:absolute md:top-1/2 md:right-8 md:m-0 md:w-[400px] md:-translate-y-1/2">
           <div
-            class="bg-white p-6 sm:p-7"
+            class="border border-white/50 bg-white/75 p-6 shadow-[0_24px_60px_-20px_rgba(22,33,58,0.55)] backdrop-blur-md sm:p-7"
             data-clr-contact-form
             data-variant="compact"
             data-source="home-hero"
@@ -116,7 +119,7 @@ get_header(); ?>
 
   <!-- Servicios -->
   <section class="bg-cream-100 py-20 lg:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
       <div class="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end">
         <div>
           <p class="eyebrow"><?php esc_html_e('Our Services', 'casa-lumen'); ?></p>
@@ -189,7 +192,7 @@ get_header(); ?>
         <?php } ?>
       </ul>
 
-      <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn-primary mt-10">
+      <a href="<?php echo esc_url(clr_url('/about/')); ?>" class="btn-primary mt-10">
         <?php esc_html_e('Meet Yolanda', 'casa-lumen'); ?>
         <?php echo clr_icon('arrow-right', 'size-4'); ?>
       </a>
@@ -198,7 +201,7 @@ get_header(); ?>
 
   <!-- Áreas -->
   <section class="bg-bronze-800 py-16 text-white lg:py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow text-gold-300"><?php esc_html_e('San Antonio & Surrounding Areas', 'casa-lumen'); ?></p>
         <h2 class="mt-4 font-serif text-4xl leading-tight"><?php esc_html_e('Rooted in San Antonio. Focused on your next chapter.', 'casa-lumen'); ?></h2>
@@ -210,7 +213,7 @@ get_header(); ?>
       <ul class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         <?php foreach ($areas as $area) { ?>
           <li class="plane plane-light card3d">
-            <a href="<?php echo esc_url(home_url('/areas/')); ?>" class="group block overflow-hidden bg-bronze-700">
+            <a href="<?php echo esc_url(clr_url('/areas/')); ?>" class="group block overflow-hidden bg-bronze-700">
               <?php echo clr_image($area['image'], '', 'h-36 w-full object-cover transition-transform duration-500 group-hover:scale-105'); ?>
               <span class="flex items-center gap-2 px-4 py-3 text-sm font-semibold">
                 <?php echo esc_html($area['name']); ?>
