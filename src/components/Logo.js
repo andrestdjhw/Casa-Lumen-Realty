@@ -1,19 +1,13 @@
 import React from "react"
 
-// Aproximación tipográfica del logotipo horizontal de la propuesta de branding.
-// Reemplazar por el SVG oficial (la «L» de Lumen es dibujada a medida).
-function Logo({ className = "", light = false }) {
-  const color = light ? "text-cream-50" : "text-navy-800"
+// Logotipo oficial (assets/brand/). Horizontal azul en el navbar; principal (apilado)
+// en crema para fondos oscuros como el footer. El enlace que lo envuelve lleva el nombre.
+function Logo({ brand, light = false, className = "" }) {
+  const src = light ? brand.logoLight : brand.logo
+  const [width, height] = light ? brand.logoLightSize : brand.logoSize
+  const size = light ? "h-20 w-auto" : "h-9 w-auto sm:h-11 lg:h-9 xl:h-11"
 
-  return (
-    <span className={`inline-flex flex-col items-end leading-none ${color} ${className}`}>
-      <span className="flex items-baseline gap-1.5">
-        <span className="font-serif text-[15px] font-bold tracking-wide">CASA</span>
-        <span className="font-serif text-[30px] font-bold tracking-tight">lumen</span>
-      </span>
-      <span className="mt-1 mr-[-0.5em] text-[10px] font-semibold tracking-[0.5em]">REALTY</span>
-    </span>
-  )
+  return <img src={src} alt="" width={width} height={height} className={`${size} ${className}`} decoding="async" />
 }
 
 export default Logo

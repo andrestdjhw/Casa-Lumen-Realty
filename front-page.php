@@ -63,7 +63,14 @@ get_header(); ?>
 
   <!-- Hero -->
   <section class="relative overflow-hidden bg-cream-200">
-    <div class="mx-auto grid max-w-site lg:grid-cols-[1fr_1.05fr]">
+    <!-- Escritorio: la foto ocupa todo el ancho; a la izquierda se funde con el crema para que el texto se lea. -->
+    <div class="absolute inset-0 hidden lg:block" aria-hidden="true">
+      <?php echo clr_image('hero-yolanda.jpg', '', 'size-full object-cover object-center', true); ?>
+      <div class="absolute inset-0 bg-navy-900/25"></div>
+      <div class="absolute inset-0 bg-linear-to-r from-cream-200 from-38% via-cream-200/70 via-50% to-transparent to-66%"></div>
+    </div>
+
+    <div class="relative mx-auto grid max-w-site lg:grid-cols-[1fr_1.05fr]">
       <div class="px-4 pt-12 pb-14 sm:px-6 sm:pt-16 lg:py-24 lg:pr-10">
         <p class="eyebrow"><?php esc_html_e('San Antonio real estate · Out in the open', 'casa-lumen'); ?></p>
         <h1 class="mt-6 font-serif text-[2.6rem] leading-[1.12] text-ink sm:text-[3.5rem] xl:text-[4rem]">
@@ -92,24 +99,27 @@ get_header(); ?>
       </div>
 
       <div class="relative lg:min-h-[720px]">
-        <div class="relative h-[420px] sm:h-[520px] lg:absolute lg:inset-y-0 lg:left-0 lg:right-[min(0px,calc((var(--container-site)-100vw)/2))] lg:h-auto">
-          <?php echo clr_image('hero-yolanda.jpg', __('Yolanda H. Barboza, Casa Lumen Realty', 'casa-lumen'), 'size-full object-cover object-top', true); ?>
-          <!-- Overlay navy de la paleta -->
-          <div class="absolute inset-0 bg-navy-900/55" aria-hidden="true"></div>
+        <!-- Móvil y tablet: la foto va como bloque entre el texto y el formulario. -->
+        <!-- Sin overlay (la apagaba); encuadre en la casa y bordes fundidos con el crema. -->
+        <div class="relative h-[340px] sm:h-[460px] lg:hidden">
+          <?php echo clr_image('hero-yolanda.jpg', __('Yolanda H. Barboza, Casa Lumen Realty', 'casa-lumen'), 'size-full object-cover object-[center_70%]', true); ?>
+          <div class="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-cream-200 to-transparent" aria-hidden="true"></div>
+          <div class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-cream-200 to-transparent" aria-hidden="true"></div>
         </div>
 
         <!-- Formulario translúcido (sin la sombra rayada: se vería a través del vidrio). -->
-        <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-6 md:absolute md:top-1/2 md:right-8 md:m-0 md:w-[400px] md:-translate-y-1/2">
+        <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-auto sm:max-w-lg lg:absolute lg:top-1/2 lg:right-8 lg:m-0 lg:w-[400px] lg:-translate-y-1/2">
           <div
-            class="border border-white/50 bg-white/75 p-6 shadow-[0_24px_60px_-20px_rgba(22,33,58,0.55)] backdrop-blur-md sm:p-7"
+            class="levitate border border-white/20 bg-navy-900 p-6 sm:p-7 lg:bg-navy-900/55 lg:backdrop-blur-md"
             data-clr-contact-form
+            data-tone="dark"
             data-variant="compact"
             data-source="home-hero"
             data-title="<?php esc_attr_e('Let’s talk about your next move.', 'casa-lumen'); ?>"
             data-intro="<?php esc_attr_e('There are no basic questions. Tell us what you’re planning and we’ll follow up with a next step.', 'casa-lumen'); ?>"
           >
             <!-- Fallback sin JavaScript -->
-            <p class="font-serif text-2xl text-ink"><?php esc_html_e('Let’s talk about your next move.', 'casa-lumen'); ?></p>
+            <p class="font-serif text-2xl text-white"><?php esc_html_e('Let’s talk about your next move.', 'casa-lumen'); ?></p>
             <a href="<?php echo esc_attr($site['phoneHref']); ?>" class="btn-primary mt-5 w-full"><?php echo esc_html(sprintf(__('Call %s', 'casa-lumen'), $site['phone'])); ?></a>
           </div>
         </div>
@@ -131,9 +141,10 @@ get_header(); ?>
       </div>
 
       <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <?php foreach ($services as $service) { ?>
+        <?php foreach ($services as $i => $service) { ?>
           <article class="plane card3d">
-            <div class="flex h-full flex-col bg-white">
+            <!-- Desfase negativo: cada tarjeta arranca en otro punto de la ola. -->
+            <div class="float flex h-full flex-col bg-white" style="--float-delay: <?php echo esc_attr(-1.5 * $i); ?>s">
               <?php echo clr_image($service['image'], '', 'h-52 w-full object-cover'); ?>
               <div class="relative flex flex-1 flex-col px-6 pt-12 pb-7">
                 <span class="absolute -top-8 left-6 flex size-16 items-center justify-center bg-white text-gold-500 ring-1 ring-cream-200">
@@ -164,7 +175,7 @@ get_header(); ?>
     <div class="relative min-h-[420px] lg:min-h-[560px]">
       <?php echo clr_image('about-interior.jpg', '', 'absolute inset-0 size-full object-cover'); ?>
       <div class="absolute bottom-0 left-0 max-w-md bg-navy-900 p-8 text-white sm:p-10">
-        <?php echo clr_seal('size-32 text-gold-300', __('Casa Lumen Realty seal: See what you own', 'casa-lumen')); ?>
+        <?php echo clr_seal('size-32', __('Casa Lumen Realty seal: See what you own', 'casa-lumen'), true); ?>
         <p class="mt-6 font-serif text-3xl leading-snug sm:text-4xl">
           <?php esc_html_e('Real estate, out in the open.', 'casa-lumen'); ?>
         </p>
@@ -210,16 +221,17 @@ get_header(); ?>
         </p>
       </div>
 
-      <ul class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+      <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <?php foreach ($areas as $area) { ?>
-          <li class="plane plane-light card3d">
-            <a href="<?php echo esc_url(clr_url('/areas/')); ?>" class="group block overflow-hidden bg-bronze-700">
-              <?php echo clr_image($area['image'], '', 'h-36 w-full object-cover transition-transform duration-500 group-hover:scale-105'); ?>
-              <span class="flex items-center gap-2 px-4 py-3 text-sm font-semibold">
+          <!-- Sin card3d: un mapa interactivo no debe inclinarse mientras se arrastra. -->
+          <li class="plane plane-light">
+            <div class="bg-bronze-700">
+              <?php echo clr_area_map($area, 'h-[246px] w-full'); ?>
+              <a href="<?php echo esc_url(clr_url('/areas/')); ?>" class="group flex items-center gap-2 px-5 py-4 text-base font-semibold">
                 <?php echo esc_html($area['name']); ?>
                 <?php echo clr_icon('arrow-right', 'size-4 transition-transform group-hover:translate-x-1'); ?>
-              </span>
-            </a>
+              </a>
+            </div>
           </li>
         <?php } ?>
       </ul>
@@ -262,6 +274,13 @@ get_header(); ?>
       </div>
     </div>
   </section>
+
+  <!-- Preguntas frecuentes: las primeras 4; la lista completa vive en /faq/. -->
+  <?php get_template_part('template-parts/faq-section', null, array(
+    'eyebrow'  => __('Common questions', 'casa-lumen'),
+    'faqs'     => array_slice(clr_faqs(), 0, 4),
+    'show_all' => true,
+  )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(
     'eyebrow' => __('A conversation is the first step', 'casa-lumen'),

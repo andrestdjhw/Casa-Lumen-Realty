@@ -23,10 +23,11 @@
 <p>Este sitio usa algunos servicios de Google que pueden recopilar información directamente desde tu navegador:</p>
 <ul>
   <li><strong>Google Fonts</strong>, para mostrar las tipografías del sitio.</li>
-  <li><strong>Google Maps</strong>, para mostrar la ubicación de nuestra oficina. El mapa insertado puede usar cookies.</li>
+  <li><strong>Google Maps</strong>, para mostrar la ubicación de nuestra oficina y las zonas que atendemos. Los mapas insertados pueden usar cookies.</li>
   <li><strong>Analítica</strong>: podemos usar herramientas como Google Analytics para conocer el tráfico del sitio de forma agregada.</li>
 </ul>
-<p>Estos proveedores procesan la información según sus propias políticas de privacidad. Puedes bloquear o borrar las cookies desde la configuración de tu navegador; algunas funciones, como el mapa, podrían no funcionar como se espera.</p>
+<p>En tu primera visita te preguntamos si aceptas las cookies. La analítica y el mapa de Google solo se cargan si las aceptas. Si las rechazas, el resto del sitio funciona con normalidad. Puedes cambiar tu elección en cualquier momento con el enlace “Configuración de cookies” al final de cada página.</p>
+<p>Estos proveedores procesan la información según sus propias políticas de privacidad. También puedes bloquear o borrar las cookies desde la configuración de tu navegador.</p>
 
 <h2>Cuánto tiempo conservamos la información</h2>
 <p>Los formularios nos llegan por correo electrónico y no se guardan en la base de datos del sitio. Conservamos la información que recibimos solo el tiempo necesario para responderte, prestar nuestros servicios y cumplir requisitos legales o de registro.</p>

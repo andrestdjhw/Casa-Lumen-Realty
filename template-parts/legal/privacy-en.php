@@ -23,10 +23,11 @@
 <p>This website uses some services from Google that may collect information directly from your browser:</p>
 <ul>
   <li><strong>Google Fonts</strong>, to display the website’s typefaces.</li>
-  <li><strong>Google Maps</strong>, to show our office location. The embedded map may set cookies.</li>
+  <li><strong>Google Maps</strong>, to show our office location and the areas we serve. Embedded maps may set cookies.</li>
   <li><strong>Analytics</strong>: we may use tools such as Google Analytics to understand website traffic in aggregate.</li>
 </ul>
-<p>These providers process information under their own privacy policies. You can block or delete cookies in your browser settings; some features, such as the map, may not work as expected.</p>
+<p>When you first visit, we ask whether you accept cookies. Analytics and the embedded Google Map load only if you accept. If you reject them, the rest of the website works normally. You can change your choice at any time with the “Cookie settings” link at the bottom of every page.</p>
+<p>These providers process information under their own privacy policies. You can also block or delete cookies in your browser settings.</p>
 
 <h2>How long we keep information</h2>
 <p>Form submissions are delivered to us by email and are not stored in the website’s database. We keep the information we receive only as long as needed to respond to you, provide our services, and meet legal or record-keeping requirements.</p>

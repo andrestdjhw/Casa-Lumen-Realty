@@ -36,7 +36,7 @@ function FloatingCall({ site, i18n, visible: wanted }) {
       aria-label={`${i18n.call} ${site.phone}`}
       aria-hidden={!visible}
       tabIndex={visible ? undefined : -1}
-      className={`plane fixed right-4 bottom-4 z-40 transition-all duration-300 ease-out motion-reduce:transition-none sm:right-6 sm:bottom-6 ${
+      className={`clr-floating-call plane fixed right-4 bottom-4 z-40 transition-all duration-300 ease-out motion-reduce:transition-none sm:right-6 sm:bottom-6 ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >

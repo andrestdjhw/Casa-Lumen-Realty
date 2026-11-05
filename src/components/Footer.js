@@ -1,12 +1,14 @@
 import React from "react"
 import Logo from "./Logo"
 import Icon from "./Icon"
+import MapEmbed from "./MapEmbed"
+import { openCookieSettings } from "../consent"
 
 function OfficeMap({ site, i18n }) {
   return (
     <div className="overflow-hidden border border-white/10 bg-white">
       <div className="relative h-48 bg-cream-100">
-        <iframe title={i18n.mapTitle} src={site.mapsEmbed} className="absolute inset-0 size-full border-0" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+        <MapEmbed site={site} i18n={i18n} className="absolute inset-0 size-full" />
       </div>
       <div className="p-4 text-sm leading-relaxed text-ink/75">
         {site.address.map(line => (
@@ -46,7 +48,7 @@ function Footer({ config }) {
       <div className="mx-auto grid max-w-site gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_1.3fr_1.4fr]">
         <div>
           <a href={homeUrl} aria-label={site.name}>
-            <Logo light />
+            <Logo brand={config.brand} light />
           </a>
           <p className="mt-6 max-w-[16rem] text-sm leading-relaxed text-white/70">{site.tagline}</p>
           <ul aria-label={i18n.social} className="mt-6 flex gap-4 text-white/80">
@@ -144,6 +146,11 @@ function Footer({ config }) {
                 </a>
               </li>
             ))}
+            <li>
+              <button type="button" onClick={openCookieSettings} className="hover:text-white">
+                {i18n.cookieSettings}
+              </button>
+            </li>
             <li>
               <a href={i18n.creditUrl} target="_blank" rel="noopener" lang="en" className="font-semibold text-white/80 hover:text-white">
                 {i18n.credit}

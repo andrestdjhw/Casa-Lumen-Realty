@@ -30,7 +30,7 @@ get_header(); ?>
 
   <section class="bg-cream-50 py-20 lg:py-24">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
-      <?php echo clr_isotype('mx-auto h-14 w-16 text-navy-800'); ?>
+      <?php echo clr_isotype('mx-auto h-16 w-auto'); ?>
       <p class="eyebrow mt-8"><?php esc_html_e('Next step', 'casa-lumen'); ?></p>
       <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php esc_html_e('Start with the property strategy, not a promise.', 'casa-lumen'); ?></h2>
       <p class="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed text-ink/75">

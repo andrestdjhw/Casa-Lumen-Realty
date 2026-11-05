@@ -32,6 +32,13 @@
   }
 }
 
+/* En móvil el aviso de cookies ocupa el borde inferior: el botón de llamada espera a que se decida. */
+@media (max-width: 639px) {
+  .clr-cookie-open .clr-floating-call {
+    display: none;
+  }
+}
+
 /* Con sesión iniciada, el header pegajoso queda bajo la barra de administración de
    WordPress (fija: 32px escritorio, 46px tablet; en ≤600px deja de ser fija).
    Va fuera de @layer para ganarle a la utilidad top-0 del header. */
@@ -111,7 +118,51 @@
     transform: translate(18px, 20px);
   }
 
+  /* Levitación: el plano flota despacio y su sombra se abre al subir.
+     Se pausa mientras el usuario escribe dentro (focus-within). */
+  .levitate {
+    animation: clr-levitate 6s ease-in-out infinite;
+  }
+
+  .levitate:focus-within {
+    animation-play-state: paused;
+  }
+
+  @keyframes clr-levitate {
+    0%,
+    100% {
+      transform: translateY(0);
+      box-shadow: 0 24px 50px -22px rgb(22 33 58 / 0.55);
+    }
+    50% {
+      transform: translateY(-8px);
+      box-shadow: 0 40px 70px -26px rgb(22 33 58 / 0.45);
+    }
+  }
+
+  /* Flotación continua para tarjetas: va en el hijo del .plane, así el plano sube y
+     se separa de su sombra rayada, que se queda quieta. Desfase con --float-delay. */
+  .float {
+    animation: clr-float 6s ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+  }
+
+  @keyframes clr-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .levitate,
+    .float {
+      animation: none;
+    }
+
     .card3d,
     .plane::before {
       transition: none;

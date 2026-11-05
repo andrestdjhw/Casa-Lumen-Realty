@@ -31,11 +31,11 @@ get_header(); ?>
         </p>
       </div>
 
-      <ul class="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3">
+      <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <?php foreach ($areas as $area) { ?>
-          <li class="plane plane-light card3d">
+          <li class="plane plane-light">
             <div class="bg-bronze-700">
-              <?php echo clr_image($area['image'], '', 'h-48 w-full object-cover'); ?>
+              <?php echo clr_area_map($area, 'h-64 w-full'); ?>
               <p class="px-5 py-4 font-serif text-lg"><?php echo esc_html($area['name']); ?></p>
             </div>
           </li>

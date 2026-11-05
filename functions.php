@@ -5,6 +5,7 @@ require get_theme_file_path('inc/site-data.php');
 require get_theme_file_path('inc/helpers.php');
 require get_theme_file_path('inc/brand.php');
 require get_theme_file_path('inc/contact.php');
+require get_theme_file_path('inc/consent.php');
 require get_theme_file_path('inc/seo.php');
 require get_theme_file_path('inc/setup.php');
 

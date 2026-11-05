@@ -78,8 +78,11 @@ get_header(); ?>
     </div>
   </section>
 
+  <!-- Mapa (React, MapEmbed): se inserta solo con consentimiento de cookies. -->
   <section aria-label="<?php esc_attr_e('Office location', 'casa-lumen'); ?>" class="h-[420px] bg-cream-200">
-    <iframe title="<?php esc_attr_e('Map of the Casa Lumen Realty office', 'casa-lumen'); ?>" src="<?php echo esc_url($site['mapsEmbed']); ?>" class="size-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div data-clr-map class="size-full">
+      <a href="<?php echo esc_url($site['mapsUrl']); ?>" target="_blank" rel="noopener" class="flex size-full items-center justify-center font-semibold text-gold-600"><?php esc_html_e('Open in Google Maps', 'casa-lumen'); ?></a>
+    </div>
   </section>
 </main>
 

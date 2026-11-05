@@ -39,7 +39,7 @@ get_header(); ?>
         </p>
         <!-- TODO: biografía completa, licencia y credenciales cuando Yolanda las apruebe. -->
         <div class="mt-10 flex items-center gap-6">
-          <?php echo clr_seal('size-32 shrink-0 text-navy-800', __('Casa Lumen Realty seal: See what you own', 'casa-lumen')); ?>
+          <?php echo clr_seal('size-32 shrink-0', __('Casa Lumen Realty seal: See what you own', 'casa-lumen')); ?>
           <p class="font-serif text-2xl leading-snug text-ink"><?php esc_html_e('See it all. Then decide.', 'casa-lumen'); ?></p>
         </div>
       </div>

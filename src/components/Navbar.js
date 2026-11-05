@@ -169,7 +169,7 @@ function Navbar({ config }) {
       <div className={`relative bg-cream-50/95 backdrop-blur transition-shadow ${scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-12px_rgba(0,0,0,0.12)]" : ""}`}>
       <div className="mx-auto flex h-20 max-w-site items-center justify-between gap-6 px-4 sm:px-6">
         <a href={homeUrl} aria-label={site.name} className="shrink-0">
-          <Logo />
+          <Logo brand={config.brand} />
         </a>
 
         <nav aria-label="Primary" className="hidden lg:block">
@@ -212,7 +212,7 @@ function Navbar({ config }) {
             ))}
           </div>
 
-          <a href={site.contactUrl} className="btn-primary hidden py-3.5! md:inline-flex">
+          <a href={site.contactUrl} className="btn-primary hidden py-3.5! whitespace-nowrap md:inline-flex">
             {i18n.cta}
             <Icon name="arrow-right" className="size-4" />
           </a>
