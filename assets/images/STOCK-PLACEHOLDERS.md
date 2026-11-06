@@ -3,6 +3,9 @@
 Todas las imágenes de esta carpeta son temporales, de Unsplash (Unsplash License: uso gratuito, sin atribución obligatoria).
 Reemplazar por las fotos del cliente manteniendo el mismo nombre de archivo, y borrar este archivo cuando ya no quede ninguna.
 
+Las fotos que se ven en espacios grandes van a 2000px de ancho, con una copia "-900.jpg" que el sitio usa en tarjetas (srcset en clr_image()).
+Al reemplazar una de esas, sustituir también su "-900.jpg" (o borrarla: sin ella se usa siempre la grande).
+
 No representan propiedades de Casa Lumen ni las ciudades que indican sus nombres (brief §15: no publicar stock que sugiera propiedades no representadas).
 
 | Archivo | Uso | Fuente |

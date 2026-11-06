@@ -80,12 +80,13 @@ function trackLead(interest) {
   if (leadEvents[interest]) window.dataLayer.push({ event: leadEvents[interest] })
 }
 
-function ContactForm({ config, variant = "full", source = "", title, intro, interest = "", fields, submit, tone = "light" }) {
+function ContactForm({ config, variant = "full", source = "", title, intro, interest = "", fields, submit, tone = "light", dense = false }) {
   const { form, lang } = config
   const { i18n: t, options, endpoint } = form
   const full = variant === "full"
   const theme = THEMES[tone] || THEMES.light
-  const inputClass = theme.input
+  // "dense": versión más compacta (formulario del hero, pedido del cliente).
+  const inputClass = dense ? `${theme.input} py-2! text-[13px]!` : theme.input
   const extraFields = fields ? fields.split(",").map(f => f.trim()).filter(Boolean) : full ? DEFAULT_FULL_FIELDS : []
   const uid = useRef(`cf-${source || variant}`).current
   const startedAt = useRef(Date.now())
@@ -217,17 +218,17 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
 
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate>
-      {title && <h2 className={`font-serif text-2xl leading-tight ${theme.title}`}>{title}</h2>}
-      {intro && <p className={`mt-2 text-sm leading-relaxed ${theme.intro}`}>{intro}</p>}
+      {title && <h2 className={`font-serif leading-tight ${dense ? "text-xl" : "text-2xl"} ${theme.title}`}>{title}</h2>}
+      {intro && <p className={`mt-2 leading-relaxed ${dense ? "text-xs" : "text-sm"} ${theme.intro}`}>{intro}</p>}
 
-      <div className={`grid gap-4 ${title || intro ? "mt-5" : ""} ${full ? "sm:grid-cols-2" : ""}`}>
+      <div className={`grid ${dense ? "gap-3" : "gap-4"} ${title || intro ? (dense ? "mt-4" : "mt-5") : ""} ${full ? "sm:grid-cols-2" : ""}`}>
         <fieldset className={full ? "sm:col-span-2" : ""}>
           <legend className={`mb-2 block text-xs font-semibold ${theme.label}`}>{t.interest}</legend>
           <div className={`grid gap-2 ${full ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2"}`}>
             {Object.entries(options.interest).map(([value, label]) => (
               <label
                 key={value}
-                className={`cursor-pointer rounded-sm border px-3 py-2 text-center text-xs font-semibold transition-colors has-focus-visible:ring-2 has-focus-visible:ring-gold-500/40 ${theme.pill}`}
+                className={`cursor-pointer rounded-sm border px-3 text-center ${dense ? "py-1.5" : "py-2"} text-xs font-semibold transition-colors has-focus-visible:ring-2 has-focus-visible:ring-gold-500/40 ${theme.pill}`}
               >
                 <input type="radio" name="interest" value={value} checked={values.interest === value} onChange={set("interest")} className="sr-only" aria-describedby={describedBy("interest")} />
                 {label}
@@ -294,7 +295,7 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
         </div>
 
         <div className={full ? "sm:col-span-2" : ""}>
-          <button type="submit" disabled={status === "sending"} className={`${theme.submit} w-full disabled:cursor-wait disabled:opacity-70`}>
+          <button type="submit" disabled={status === "sending"} className={`${theme.submit} w-full ${dense ? "py-3!" : ""} disabled:cursor-wait disabled:opacity-70`}>
             {status === "sending" ? t.sending : submit || t.submit}
             {status !== "sending" && <Icon name="arrow-right" className="size-4" />}
           </button>

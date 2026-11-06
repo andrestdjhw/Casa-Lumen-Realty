@@ -15,6 +15,8 @@ get_header(); ?>
     'eyebrow' => __('Contact', 'casa-lumen'),
     'title'   => __('Let’s talk about your next move.', 'casa-lumen'),
     'intro'   => __('Tell us what you are planning, and our team can follow up about the next step. You are also welcome to call us directly.', 'casa-lumen'),
+    // Foto del cliente (uploads/2026/11/ContactUs.jpg), optimizada en assets/images.
+    'image'   => 'contact.jpg',
   )); ?>
 
   <section id="lead" class="scroll-mt-28 bg-cream-100 py-20 lg:py-24">

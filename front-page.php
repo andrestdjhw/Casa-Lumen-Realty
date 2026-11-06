@@ -71,14 +71,22 @@ get_header(); ?>
     </div>
 
     <div class="relative mx-auto grid max-w-site lg:grid-cols-[1fr_1.05fr]">
-      <div class="px-4 pt-12 pb-14 sm:px-6 sm:pt-16 lg:py-24 lg:pr-10">
-        <p class="eyebrow"><?php esc_html_e('San Antonio real estate · Out in the open', 'casa-lumen'); ?></p>
-        <h1 class="mt-6 font-serif text-[2.6rem] leading-[1.12] text-ink sm:text-[3.5rem] xl:text-[4rem]">
+      <div class="relative z-10 px-4 pt-10 pb-32 sm:px-6 sm:pt-14 sm:pb-40 lg:py-16 lg:pr-10">
+        <!-- Móvil y tablet: la foto es el fondo del texto. Velo crema fuerte arriba (legibilidad)
+             que se aclara hacia abajo para dejar ver la casa detrás de los beneficios y el formulario. -->
+        <div class="absolute inset-0 -z-10 overflow-hidden lg:hidden" aria-hidden="true">
+          <?php echo clr_image('hero-yolanda.jpg', '', 'size-full object-cover object-[center_60%]', true); ?>
+          <div class="absolute inset-0 bg-linear-to-b from-cream-200/95 from-30% via-cream-200/75 via-60% to-cream-200/60 to-85%"></div>
+        </div>
+        <!-- Pedido del cliente: el logo es lo primero que se ve al entrar. -->
+        <?php echo clr_brand_img('logo-principal', 'Casa Lumen Realty', 'h-24 w-auto sm:h-28 xl:h-32'); ?>
+        <p class="eyebrow mt-8"><?php esc_html_e('San Antonio real estate · Out in the open', 'casa-lumen'); ?></p>
+        <h1 class="mt-5 font-serif text-[2.4rem] leading-[1.12] text-ink sm:text-[3.2rem] xl:text-[3.5rem]">
           <?php esc_html_e('See the whole deal.', 'casa-lumen'); ?>
           <span class="block text-gold-500"><?php esc_html_e('Then decide.', 'casa-lumen'); ?></span>
         </h1>
-        <span class="ruler mt-8 block max-w-xs text-gold-500" aria-hidden="true"></span>
-        <p class="mt-8 max-w-lg text-[17px] leading-relaxed text-ink/75">
+        <span class="ruler mt-7 block max-w-xs text-gold-500" aria-hidden="true"></span>
+        <p class="mt-7 max-w-lg text-[17px] leading-relaxed text-ink/75">
           <?php esc_html_e('Buying, selling, or investing in San Antonio? Casa Lumen Realty explains every step, cost, and role before you commit, in English and in Spanish. You set the pace.', 'casa-lumen'); ?>
         </p>
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -91,7 +99,7 @@ get_header(); ?>
             <?php echo esc_html($site['phone']); ?>
           </a>
         </div>
-        <ul class="mt-12 grid max-w-lg grid-cols-3 gap-4 text-xs leading-snug text-ink/75">
+        <ul class="mt-10 grid max-w-lg grid-cols-3 gap-4 text-xs leading-snug text-ink/75">
           <li class="flex items-center gap-2.5"><?php echo clr_icon('home', 'size-7 shrink-0 text-gold-500'); ?><?php esc_html_e('Every step explained', 'casa-lumen'); ?></li>
           <li class="flex items-center gap-2.5"><?php echo clr_icon('users', 'size-7 shrink-0 text-gold-500'); ?>English · Español</li>
           <li class="flex items-center gap-2.5"><?php echo clr_icon('map-pin', 'size-7 shrink-0 text-gold-500'); ?><?php esc_html_e('San Antonio & surrounding areas', 'casa-lumen'); ?></li>
@@ -99,20 +107,13 @@ get_header(); ?>
       </div>
 
       <div class="relative lg:min-h-[720px]">
-        <!-- Móvil y tablet: la foto va como bloque entre el texto y el formulario. -->
-        <!-- Sin overlay (la apagaba); encuadre en la casa y bordes fundidos con el crema. -->
-        <div class="relative h-[340px] sm:h-[460px] lg:hidden">
-          <?php echo clr_image('hero-yolanda.jpg', __('Yolanda H. Barboza, Casa Lumen Realty', 'casa-lumen'), 'size-full object-cover object-[center_70%]', true); ?>
-          <div class="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-cream-200 to-transparent" aria-hidden="true"></div>
-          <div class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-cream-200 to-transparent" aria-hidden="true"></div>
-        </div>
-
         <!-- Formulario translúcido (sin la sombra rayada: se vería a través del vidrio). -->
-        <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-auto sm:max-w-lg lg:absolute lg:top-1/2 lg:right-8 lg:m-0 lg:w-[400px] lg:-translate-y-1/2">
+        <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-auto sm:max-w-lg lg:absolute lg:top-1/2 lg:right-8 lg:m-0 lg:w-[340px] lg:-translate-y-1/2">
           <div
-            class="levitate border border-white/20 bg-navy-900 p-6 sm:p-7 lg:bg-navy-900/55 lg:backdrop-blur-md"
+            class="levitate border border-white/20 bg-navy-900 p-6 lg:bg-navy-900/55 lg:p-5 lg:backdrop-blur-md"
             data-clr-contact-form
             data-tone="dark"
+            data-dense="1"
             data-variant="compact"
             data-source="home-hero"
             data-title="<?php esc_attr_e('Let’s talk about your next move.', 'casa-lumen'); ?>"
@@ -145,7 +146,7 @@ get_header(); ?>
           <article class="plane card3d">
             <!-- Desfase negativo: cada tarjeta arranca en otro punto de la ola. -->
             <div class="float flex h-full flex-col bg-white" style="--float-delay: <?php echo esc_attr(-1.5 * $i); ?>s">
-              <?php echo clr_image($service['image'], '', 'h-52 w-full object-cover'); ?>
+              <?php echo clr_image($service['image'], '', 'h-52 w-full object-cover', false, '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'); ?>
               <div class="relative flex flex-1 flex-col px-6 pt-12 pb-7">
                 <span class="absolute -top-8 left-6 flex size-16 items-center justify-center bg-white text-gold-500 ring-1 ring-cream-200">
                   <?php echo clr_icon($service['icon'], 'size-8'); ?>
@@ -173,7 +174,7 @@ get_header(); ?>
   <!-- Nosotros -->
   <section class="grid lg:grid-cols-2">
     <div class="relative min-h-[420px] lg:min-h-[560px]">
-      <?php echo clr_image('about-interior.jpg', '', 'absolute inset-0 size-full object-cover'); ?>
+      <?php echo clr_image('about-interior.jpg', '', 'absolute inset-0 size-full object-cover', false, '(min-width: 1024px) 50vw, 100vw'); ?>
       <div class="absolute bottom-0 left-0 max-w-md bg-navy-900 p-8 text-white sm:p-10">
         <?php echo clr_seal('size-32', __('Casa Lumen Realty seal: See what you own', 'casa-lumen'), true); ?>
         <p class="mt-6 font-serif text-3xl leading-snug sm:text-4xl">
@@ -241,7 +242,7 @@ get_header(); ?>
   <!-- Testimonios -->
   <section class="grid bg-cream-50 lg:grid-cols-[2fr_minmax(0,1fr)]">
     <div class="relative hidden min-h-[380px] lg:order-last lg:block">
-      <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza at her desk', 'casa-lumen'), 'absolute inset-0 size-full object-cover'); ?>
+      <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza at her desk', 'casa-lumen'), 'absolute inset-0 size-full object-cover', false, '33vw'); ?>
     </div>
     <div class="px-4 py-16 sm:px-10 lg:py-14">
       <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">

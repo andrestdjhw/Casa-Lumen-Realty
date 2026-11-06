@@ -49,7 +49,7 @@ $image = $args['image'] ?? '';
     <?php if ($image) { ?>
       <div class="relative h-80 sm:h-[26rem] lg:h-auto">
         <div class="absolute inset-0 lg:right-[min(0px,calc((var(--container-site)-100vw)/2))]">
-          <?php echo clr_image($image, '', 'size-full object-cover', true); ?>
+          <?php echo clr_image($image, '', 'size-full object-cover', true, '(min-width: 1024px) 50vw, 100vw'); ?>
         </div>
       </div>
     <?php } ?>

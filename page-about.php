@@ -24,7 +24,7 @@ get_header(); ?>
     <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
       <div class="plane">
         <div class="relative aspect-[4/5] bg-white">
-          <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza', 'casa-lumen'), 'absolute inset-0 size-full object-cover'); ?>
+          <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza', 'casa-lumen'), 'absolute inset-0 size-full object-cover', false, '(min-width: 1024px) 50vw, 100vw'); ?>
         </div>
       </div>
       <div>
