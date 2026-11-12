@@ -143,17 +143,19 @@ get_header(); ?>
 
       <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <?php foreach ($services as $i => $service) { ?>
-          <article class="plane card3d">
+          <article class="plane card3d cursor-pointer">
             <!-- Desfase negativo: cada tarjeta arranca en otro punto de la ola. -->
             <div class="float flex h-full flex-col bg-white" style="--float-delay: <?php echo esc_attr(-1.5 * $i); ?>s">
               <?php echo clr_image($service['image'], '', 'h-52 w-full object-cover', false, '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'); ?>
-              <div class="relative flex flex-1 flex-col px-6 pt-12 pb-7">
-                <span class="absolute -top-8 left-6 flex size-16 items-center justify-center bg-white text-gold-500 ring-1 ring-cream-200">
+              <!-- Sin "relative" aquí: el enlace debe tomar como referencia la tarjeta entera. -->
+              <div class="flex flex-1 flex-col px-6 pb-7">
+                <span class="pointer-events-none relative -mt-8 mb-4 flex size-16 items-center justify-center bg-white text-gold-500 ring-1 ring-cream-200">
                   <?php echo clr_icon($service['icon'], 'size-8'); ?>
                 </span>
                 <h3 class="font-serif text-xl text-ink"><?php echo esc_html($service['title']); ?></h3>
                 <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/70"><?php echo esc_html($service['text']); ?></p>
-                <a href="<?php echo esc_url($service['url']); ?>" class="link-arrow mt-6">
+                <!-- El ::after del enlace cubre toda la tarjeta: clic en cualquier parte lleva a la subpágina. -->
+                <a href="<?php echo esc_url($service['url']); ?>" class="link-arrow mt-6 after:absolute after:inset-0 after:content-['']">
                   <?php echo esc_html($service['link']); ?>
                   <?php echo clr_icon('arrow-right', 'size-4'); ?>
                 </a>

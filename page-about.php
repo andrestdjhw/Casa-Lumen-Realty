@@ -31,13 +31,24 @@ get_header(); ?>
         <p class="eyebrow"><?php esc_html_e('Meet Yolanda', 'casa-lumen'); ?></p>
         <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php esc_html_e('A personal approach to an important decision.', 'casa-lumen'); ?></h2>
         <span class="ruler mt-8 block max-w-xs text-gold-500" aria-hidden="true"></span>
-        <p class="mt-8 text-[17px] leading-relaxed text-ink/75">
-          <?php esc_html_e('Yolanda H. Barboza brings a background in real estate and experience informed by financial and banking work.', 'casa-lumen'); ?>
-        </p>
-        <p class="mt-4 text-[17px] leading-relaxed text-ink/75">
-          <?php esc_html_e('She knows the system from the inside, and she puts each step in plain view: what you need, what it costs, and what comes next, in English and in Spanish.', 'casa-lumen'); ?>
-        </p>
-        <!-- TODO: biografía completa, licencia y credenciales cuando Yolanda las apruebe. -->
+        <!--
+          Biografía estándar redactada con el brief (§01, §08) y el cuestionario. A propósito no
+          menciona años de experiencia, credenciales (GRI/SRS/PSA), número de licencia ni NMLS:
+          el brief pide publicarlos solo cuando Yolanda y TREC los confirmen.
+        -->
+        <div class="mt-8 space-y-4 text-[17px] leading-relaxed text-ink/75">
+          <p><?php esc_html_e('Yolanda H. Barboza leads Casa Lumen Realty, bringing a background in real estate together with experience informed by financial and banking work.', 'casa-lumen'); ?></p>
+          <p><?php esc_html_e('That experience shapes the way she works. She knows the system from the inside, and she puts each step in plain view: what you need, what it costs, and what comes next. Before any decision, the numbers, the documents, and the timeline are on the table.', 'casa-lumen'); ?></p>
+          <p><?php esc_html_e('She works with first-time buyers and families who want to understand the process without pressure, homeowners preparing to sell, families relocating to the San Antonio area, and clients exploring investment property. Every conversation can happen in English or in Spanish, and no question is too basic.', 'casa-lumen'); ?></p>
+          <p><?php esc_html_e('For Yolanda, the relationship does not end at closing. Clients are welcome to come back with questions about their property, their next move, or the professionals they may need along the way.', 'casa-lumen'); ?></p>
+        </div>
+
+        <ul class="mt-8 grid gap-4 border-y border-ink/10 py-6 text-[15px] font-medium text-ink sm:grid-cols-3">
+          <li class="flex items-center gap-3"><?php echo clr_icon('users', 'size-5 shrink-0 text-gold-500'); ?><?php esc_html_e('English & Spanish', 'casa-lumen'); ?></li>
+          <li class="flex items-center gap-3"><?php echo clr_icon('chart', 'size-5 shrink-0 text-gold-500'); ?><?php esc_html_e('Financial perspective', 'casa-lumen'); ?></li>
+          <li class="flex items-center gap-3"><?php echo clr_icon('map-pin', 'size-5 shrink-0 text-gold-500'); ?><?php esc_html_e('San Antonio, TX', 'casa-lumen'); ?></li>
+        </ul>
+
         <div class="mt-10 flex items-center gap-6">
           <?php echo clr_seal('size-32 shrink-0', __('Casa Lumen Realty seal: See what you own', 'casa-lumen')); ?>
           <p class="font-serif text-2xl leading-snug text-ink"><?php esc_html_e('See it all. Then decide.', 'casa-lumen'); ?></p>

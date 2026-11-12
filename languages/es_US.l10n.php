@@ -299,5 +299,12 @@ return array(
     'Uses Google cookies' => 'Usa cookies de Google',
     'Common questions' => 'Preguntas frecuentes',
     'See all questions' => 'Ver todas las preguntas',
+    'Yolanda H. Barboza leads Casa Lumen Realty, bringing a background in real estate together with experience informed by financial and banking work.' => 'Yolanda H. Barboza está al frente de Casa Lumen Realty. Une su trayectoria inmobiliaria con experiencia en el ámbito bancario y financiero.',
+    'That experience shapes the way she works. She knows the system from the inside, and she puts each step in plain view: what you need, what it costs, and what comes next. Before any decision, the numbers, the documents, and the timeline are on the table.' => 'Esa experiencia define su forma de trabajar. Conoce el sistema por dentro y pone cada paso a plena vista: qué necesitas, cuánto cuesta y qué sigue. Antes de cualquier decisión, los números, los documentos y los tiempos están sobre la mesa.',
+    'She works with first-time buyers and families who want to understand the process without pressure, homeowners preparing to sell, families relocating to the San Antonio area, and clients exploring investment property. Every conversation can happen in English or in Spanish, and no question is too basic.' => 'Trabaja con compradores primerizos y familias que quieren entender el proceso sin presión, propietarios que se preparan para vender, familias que se mudan al área de San Antonio y clientes que exploran propiedades de inversión. Cada conversación puede ser en inglés o en español, y ninguna pregunta es demasiado básica.',
+    'For Yolanda, the relationship does not end at closing. Clients are welcome to come back with questions about their property, their next move, or the professionals they may need along the way.' => 'Para Yolanda, la relación no termina en el cierre. Sus clientes pueden volver con preguntas sobre su propiedad, su siguiente paso o los profesionales que puedan necesitar en el camino.',
+    'English & Spanish' => 'Inglés y español',
+    'Financial perspective' => 'Visión financiera',
+    'San Antonio, TX' => 'San Antonio, TX',
   ),
 );

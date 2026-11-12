@@ -94,14 +94,19 @@ function clr_faqs() {
 function clr_socials() {
   $site = clr_site();
 
-  // TODO: el cliente no ha enviado los enlaces de Instagram, TikTok ni BBB.
-  return array(
+  // TODO: el cliente no ha enviado los enlaces de Instagram, TikTok ni BBB. Una red sin URL
+  // no se muestra (evita ligas que no llevan a ningún lado); basta con pegar la URL para que aparezca.
+  $socials = array(
     array('icon' => 'facebook', 'label' => 'Facebook', 'url' => $site['facebook']),
-    array('icon' => 'instagram', 'label' => 'Instagram', 'url' => '#'),
-    array('icon' => 'tiktok', 'label' => 'TikTok', 'url' => '#'),
+    array('icon' => 'instagram', 'label' => 'Instagram', 'url' => ''),
+    array('icon' => 'tiktok', 'label' => 'TikTok', 'url' => ''),
     array('icon' => 'google', 'label' => __('Google Business Profile', 'casa-lumen'), 'url' => $site['googleProfile']),
-    array('icon' => 'bbb', 'label' => __('Better Business Bureau', 'casa-lumen'), 'url' => '#'),
+    array('icon' => 'bbb', 'label' => __('Better Business Bureau', 'casa-lumen'), 'url' => ''),
   );
+
+  return array_values(array_filter($socials, function ($social) {
+    return $social['url'] !== '';
+  }));
 }
 
 function clr_nav() {

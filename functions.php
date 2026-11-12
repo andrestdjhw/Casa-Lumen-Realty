@@ -8,6 +8,7 @@ require get_theme_file_path('inc/contact.php');
 require get_theme_file_path('inc/consent.php');
 require get_theme_file_path('inc/seo.php');
 require get_theme_file_path('inc/setup.php');
+require get_theme_file_path('inc/coming-soon.php');
 
 function casa_lumen_load_assets() {
   $asset = include get_theme_file_path('build/index.asset.php');
