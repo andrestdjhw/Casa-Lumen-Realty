@@ -59,14 +59,35 @@ get_header(); ?>
     </div>
   </section>
 
+  <?php get_template_part('template-parts/checklist', null, array(
+    'eyebrow' => __('Getting ready to sell', 'casa-lumen'),
+    'title'   => __('What to gather before the first conversation.', 'casa-lumen'),
+    'intro'   => __('None of this is required to start talking. Having it at hand simply makes the pricing and planning conversation more useful.', 'casa-lumen'),
+    'items'   => array(
+      array('title' => __('Improvements and repairs', 'casa-lumen'), 'text' => __('A list of updates, repairs, and their approximate dates: roof, HVAC, kitchen, flooring.', 'casa-lumen')),
+      array('title' => __('Known issues', 'casa-lumen'), 'text' => __('Anything you know about the property’s condition. Texas sellers generally must disclose known defects.', 'casa-lumen')),
+      array('title' => __('HOA information', 'casa-lumen'), 'text' => __('If there is a homeowners association: contact details, dues, and rules.', 'casa-lumen')),
+      array('title' => __('Mortgage details', 'casa-lumen'), 'text' => __('Your lender’s contact and an idea of the remaining balance help plan the numbers.', 'casa-lumen')),
+      array('title' => __('Your next move', 'casa-lumen'), 'text' => __('Where you are going and when. Buying and selling at the same time takes coordination.', 'casa-lumen')),
+      array('title' => __('Your goals', 'casa-lumen'), 'text' => __('What matters most to you: timing, price, convenience, or a balance of all three.', 'casa-lumen')),
+    ),
+    'class'   => 'bg-cream-100',
+  )); ?>
+
   <?php get_template_part('template-parts/lead', null, array(
     'eyebrow'  => __('Request a consultation', 'casa-lumen'),
     'title'    => __('Tell us about the property.', 'casa-lumen'),
-    'intro'    => __('Share the ZIP code, the type of property, and your timing. We start with a conversation about your goals, not with a number.', 'casa-lumen'),
+    'intro'    => __('Tell us where the property is, what kind of home it is, and your timing. We start with a conversation about your goals, not with a number.', 'casa-lumen'),
     'source'   => 'sell-page',
     'interest' => 'selling',
-    'fields'   => 'zip,propertyType,timeline,message',
     'submit'   => __('Request a Consultation', 'casa-lumen'),
+  )); ?>
+
+  <?php get_template_part('template-parts/faq-section', null, array(
+    'eyebrow'  => __('Seller questions', 'casa-lumen'),
+    'faqs'     => clr_pick_faqs(array(2, 8, 9, 7)),
+    'show_all' => true,
+    'class'    => 'bg-cream-50',
   )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(

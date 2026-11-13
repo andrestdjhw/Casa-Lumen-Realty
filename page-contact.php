@@ -80,6 +80,17 @@ get_header(); ?>
     </div>
   </section>
 
+  <?php get_template_part('template-parts/steps', null, array(
+    'eyebrow' => __('What happens next', 'casa-lumen'),
+    'title'   => __('After you send your message.', 'casa-lumen'),
+    'steps'   => array(
+      array('title' => __('We review your request', 'casa-lumen'), 'text' => __('A team member reads your message and the details you shared.', 'casa-lumen')),
+      array('title' => __('We follow up', 'casa-lumen'), 'text' => __('We reach out by phone or email, in the language you prefer.', 'casa-lumen')),
+      array('title' => __('We plan the next step together', 'casa-lumen'), 'text' => __('A conversation about your goals, the process, and realistic next steps. No pressure.', 'casa-lumen')),
+    ),
+    'class'   => 'bg-cream-50',
+  )); ?>
+
   <!-- Mapa (React, MapEmbed): se inserta solo con consentimiento de cookies. -->
   <section aria-label="<?php esc_attr_e('Office location', 'casa-lumen'); ?>" class="h-[420px] bg-cream-200">
     <div data-clr-map class="size-full">

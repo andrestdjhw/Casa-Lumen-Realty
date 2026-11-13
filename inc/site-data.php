@@ -88,7 +88,34 @@ function clr_faqs() {
       'q' => __('Do you provide property management?', 'casa-lumen'),
       'a' => __('Availability and exact services must be confirmed directly with Casa Lumen before commitment.', 'casa-lumen'),
     ),
+    // Preguntas educativas agregadas (nov 2026): información general, sin promesas. VALIDAR con Yolanda.
+    array(
+      'q' => __('What is the option period in a Texas home purchase?', 'casa-lumen'),
+      'a' => __('Many Texas purchase contracts let the buyer pay an option fee for the right to end the contract within a set number of days. It is often used for inspections and final questions. The fee, the number of days, and other terms are negotiated in each contract.', 'casa-lumen'),
+    ),
+    array(
+      'q' => __('What are closing costs?', 'casa-lumen'),
+      'a' => __('Closing costs are the fees and expenses paid to complete a transaction, such as lender, title, and recording charges. They vary by property, loan, and contract. Your lender and title company can provide estimates for your situation.', 'casa-lumen'),
+    ),
+    array(
+      'q' => __('Should I make repairs before selling?', 'casa-lumen'),
+      'a' => __('It depends on the property, its condition, your budget, and your timing. Some repairs may be worth doing before listing; others may be handled during negotiation. We can talk through the options before you decide.', 'casa-lumen'),
+    ),
+    array(
+      'q' => __('How long does it take to sell a home?', 'casa-lumen'),
+      'a' => __('Timing depends on price, condition, location, and current market conditions. We do not promise sale timelines, but we can review recent market information with you and plan around your schedule.', 'casa-lumen'),
+    ),
+    array(
+      'q' => __('Can we work together in Spanish?', 'casa-lumen'),
+      'a' => __('Yes. Every conversation can happen in English or in Spanish, and you can switch at any time. Contracts and official documents may be in English; we can walk through what each one means.', 'casa-lumen'),
+    ),
   );
+}
+
+/** Subconjunto de clr_faqs() por posición, para mostrar preguntas relacionadas en cada página. */
+function clr_pick_faqs($indexes) {
+  $faqs = clr_faqs();
+  return array_values(array_intersect_key($faqs, array_flip($indexes)));
 }
 
 function clr_socials() {

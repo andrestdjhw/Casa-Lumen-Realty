@@ -82,6 +82,19 @@ get_header(); ?>
     </div>
   </section>
 
+  <?php get_template_part('template-parts/role-grid', null, array(
+    'eyebrow' => __('Who we work with', 'casa-lumen'),
+    'title'   => __('Different moves, the same clear guidance.', 'casa-lumen'),
+    'intro'   => __('Whether it is your first home or your next property, the approach is the same: understand the process, see the costs, and decide at your pace.', 'casa-lumen'),
+    'items'   => array(
+      array('icon' => 'home', 'title' => __('First-time buyers', 'casa-lumen'), 'text' => __('For those who want to understand each step before committing.', 'casa-lumen'), 'url' => clr_url('/buy/'), 'link' => __('Learn About Buying', 'casa-lumen')),
+      array('icon' => 'key', 'title' => __('Homeowners selling', 'casa-lumen'), 'text' => __('For those who want a plan before the listing goes live.', 'casa-lumen'), 'url' => clr_url('/sell/'), 'link' => __('Learn About Selling', 'casa-lumen')),
+      array('icon' => 'map-pin', 'title' => __('Families relocating', 'casa-lumen'), 'text' => __('For those moving to the San Antonio area and comparing communities.', 'casa-lumen'), 'url' => clr_url('/areas/'), 'link' => __('Explore Areas', 'casa-lumen')),
+      array('icon' => 'chart', 'title' => __('Property investors', 'casa-lumen'), 'text' => __('For those weighing goals, timelines, and holding costs.', 'casa-lumen'), 'url' => clr_url('/invest/'), 'link' => __('Learn About Investing', 'casa-lumen')),
+    ),
+    'class'   => 'bg-cream-100',
+  )); ?>
+
   <?php get_template_part('template-parts/cta-band', null, array(
     'eyebrow' => __('Connect with Casa Lumen', 'casa-lumen'),
     'body'    => __('Whether you have a timeline or are still exploring, reach out to discuss your next move.', 'casa-lumen'),

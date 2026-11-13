@@ -49,16 +49,48 @@ get_header(); ?>
     ),
   )); ?>
 
+  <?php get_template_part('template-parts/checklist', null, array(
+    'eyebrow' => __('Before you start', 'casa-lumen'),
+    'title'   => __('A little preparation makes the search clearer.', 'casa-lumen'),
+    'intro'   => __('You do not need every answer before the first conversation. These are the points that usually help a home search start on solid ground.', 'casa-lumen'),
+    'items'   => array(
+      array('title' => __('Your priorities', 'casa-lumen'), 'text' => __('Separate what you need from what would be nice to have: size, layout, location, and condition.', 'casa-lumen')),
+      array('title' => __('A financing conversation', 'casa-lumen'), 'text' => __('A licensed lender can explain options, requirements, and what a comfortable payment may look like for you.', 'casa-lumen')),
+      array('title' => __('Your timeline', 'casa-lumen'), 'text' => __('A lease ending, a job start date, or a school year can shape when to search and when to close.', 'casa-lumen')),
+      array('title' => __('Areas to explore', 'casa-lumen'), 'text' => __('Think about commute, daily routines, and the type of neighborhood you want to live in.', 'casa-lumen')),
+      array('title' => __('Costs beyond the price', 'casa-lumen'), 'text' => __('Property taxes, insurance, HOA dues, closing costs, and upkeep are part of the full picture.', 'casa-lumen')),
+      array('title' => __('Your questions, written down', 'casa-lumen'), 'text' => __('Bring them all. There are no basic questions, in English or in Spanish.', 'casa-lumen')),
+    ),
+  )); ?>
+
+  <?php get_template_part('template-parts/role-grid', null, array(
+    'eyebrow' => __('Who is involved', 'casa-lumen'),
+    'title'   => __('The people behind a home purchase.', 'casa-lumen'),
+    'intro'   => __('A purchase usually involves several independent professionals. Knowing who does what helps you know who to ask.', 'casa-lumen'),
+    'items'   => array(
+      array('icon' => 'dollar', 'title' => __('Lender', 'casa-lumen'), 'text' => __('Reviews your financing options and explains loan requirements and documents.', 'casa-lumen')),
+      array('icon' => 'search', 'title' => __('Inspector', 'casa-lumen'), 'text' => __('Examines the condition of the home and reports what may need attention.', 'casa-lumen')),
+      array('icon' => 'chart', 'title' => __('Appraiser', 'casa-lumen'), 'text' => __('Gives an independent opinion of value, often required by the lender.', 'casa-lumen')),
+      array('icon' => 'shield', 'title' => __('Title company', 'casa-lumen'), 'text' => __('Reviews the property’s title, handles closing documents, and coordinates the closing.', 'casa-lumen')),
+    ),
+  )); ?>
+
   <?php get_template_part('template-parts/lead', null, array(
     'eyebrow'  => __('Talk about buying', 'casa-lumen'),
     'title'    => __('Start with what you need, not with listings.', 'casa-lumen'),
-    'intro'    => __('Tell us about the area, the type of home, and your timeline. A budget range is optional, and we never ask for financial documents through this form.', 'casa-lumen'),
+    'intro'    => __('Tell us about the area, the type of home, and your timeline. We never ask for financial documents through this form.', 'casa-lumen'),
     'source'   => 'buy-page',
     'interest' => 'buying',
-    'fields'   => 'budget,area,timeline,message',
     'submit'   => __('Talk About Buying a Home', 'casa-lumen'),
     // Brief §13: copy educativo seguro; sin ofrecer préstamos ni preaprobaciones.
     'note'     => __('Questions about financing? A licensed mortgage professional can explain eligibility and loan options.', 'casa-lumen'),
+  )); ?>
+
+  <?php get_template_part('template-parts/faq-section', null, array(
+    'eyebrow'  => __('Buyer questions', 'casa-lumen'),
+    'faqs'     => clr_pick_faqs(array(0, 1, 6, 7)),
+    'show_all' => true,
+    'class'    => 'bg-cream-50',
   )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(

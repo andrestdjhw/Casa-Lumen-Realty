@@ -28,6 +28,22 @@ get_header(); ?>
     ),
   )); ?>
 
+  <?php get_template_part('template-parts/checklist', null, array(
+    'eyebrow' => __('Costs beyond the purchase price', 'casa-lumen'),
+    'title'   => __('What it takes to hold a property.', 'casa-lumen'),
+    'intro'   => __('The purchase price is only the beginning. Before you decide, look at what the property will cost to own, month after month.', 'casa-lumen'),
+    'items'   => array(
+      array('title' => __('Property taxes', 'casa-lumen'), 'text' => __('In Texas they can be a significant part of the yearly cost and vary by location.', 'casa-lumen')),
+      array('title' => __('Insurance', 'casa-lumen'), 'text' => __('Coverage needs and premiums depend on the property, its use, and its location.', 'casa-lumen')),
+      array('title' => __('HOA dues and rules', 'casa-lumen'), 'text' => __('Some associations limit rentals or add requirements for owners.', 'casa-lumen')),
+      array('title' => __('Maintenance and repairs', 'casa-lumen'), 'text' => __('Older systems, roofs, and appliances need a reserve for upkeep and replacement.', 'casa-lumen')),
+      array('title' => __('Vacancy and turnover', 'casa-lumen'), 'text' => __('Time between tenants and the cost of preparing the property again.', 'casa-lumen')),
+      array('title' => __('Financing costs', 'casa-lumen'), 'text' => __('Loan terms for investment property can differ. A licensed lender can explain them.', 'casa-lumen')),
+    ),
+    'note'    => __('This page offers general information only. It is not tax, legal, or investment advice.', 'casa-lumen'),
+    'class'   => 'bg-cream-100',
+  )); ?>
+
   <section class="bg-cream-50 py-20 lg:py-24">
     <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
       <?php echo clr_isotype('mx-auto h-16 w-auto'); ?>
@@ -45,9 +61,15 @@ get_header(); ?>
     'intro'    => __('Share the areas you are considering, your timeline, and what you want the property to do for you.', 'casa-lumen'),
     'source'   => 'invest-page',
     'interest' => 'investing',
-    'fields'   => 'area,timeline,message',
     'submit'   => __('Discuss Investment Property Goals', 'casa-lumen'),
     'note'     => __('This page offers general information only. It is not tax, legal, or investment advice. Past or projected results do not guarantee future performance.', 'casa-lumen'),
+  )); ?>
+
+  <?php get_template_part('template-parts/faq-section', null, array(
+    'eyebrow'  => __('Investor questions', 'casa-lumen'),
+    'faqs'     => clr_pick_faqs(array(4, 5, 7)),
+    'show_all' => true,
+    'class'    => 'bg-cream-50',
   )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(

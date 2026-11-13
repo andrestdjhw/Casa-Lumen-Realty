@@ -2,9 +2,9 @@
 <p>This Privacy Policy explains how Casa Lumen Realty (“Casa Lumen,” “we,” “us”) collects, uses, and protects information when you visit this website or contact us through it. By using the website, you agree to the practices described here.</p>
 
 <h2>Information we collect</h2>
-<p><strong>Information you give us.</strong> When you complete a contact form, we collect the information you choose to share: your name, email address, phone number, preferred language, the type of help you are interested in, and, if you provide them, your preferred area, timeline, budget range, property ZIP code, property type, and message.</p>
+<p><strong>Information you give us.</strong> When you complete a contact form, we collect the information you choose to share: your name, email address, phone number, preferred language, the type of help you are interested in, and, if you provide them, your preferred area, timeline, and message.</p>
 <p>We do not ask for Social Security numbers, bank details, income documents, or other sensitive financial information through this website. Please do not send that information through our forms.</p>
-<p><strong>Information collected automatically.</strong> Like most websites, our server receives technical information such as your IP address, browser type, and the pages you visit. To prevent spam, we temporarily keep a coded (hashed) version of your IP address for up to one hour after you submit a form.</p>
+<p><strong>Information collected automatically.</strong> Like most websites, our server receives technical information such as your IP address, browser type, and the pages you visit.</p>
 
 <h2>How we use your information</h2>
 <ul>
@@ -17,13 +17,14 @@
 <p>We will contact you only about the inquiry you sent, by phone or email. We do not sell your personal information.</p>
 
 <h2>How we share information</h2>
-<p>We share information only when needed to serve you or operate the website, for example with our email and website hosting providers. With your permission, and only when it is part of your transaction, we may refer you to other professionals such as lenders, inspectors, or title companies. We may also disclose information if the law requires it.</p>
+<p>We share information only when needed to serve you or operate the website, for example with our email and website hosting providers. Contact form messages are delivered through EmailJS, an email delivery service, which sends your inquiry to our team and a confirmation to you. With your permission, and only when it is part of your transaction, we may refer you to other professionals such as lenders, inspectors, or title companies. We may also disclose information if the law requires it.</p>
 
 <h2>Cookies and third-party services</h2>
 <p>This website uses some services from Google that may collect information directly from your browser:</p>
 <ul>
   <li><strong>Google Fonts</strong>, to display the website’s typefaces.</li>
   <li><strong>Google Maps</strong>, to show our office location and the areas we serve. Embedded maps may set cookies.</li>
+  <li><strong>Google reCAPTCHA</strong>, to protect our contact forms from spam. It loads when you start filling out a form and analyzes technical information such as your browser and interactions with the page. Its use is subject to Google’s Privacy Policy and Terms of Service.</li>
   <li><strong>Analytics</strong>: we may use tools such as Google Analytics to understand website traffic in aggregate.</li>
 </ul>
 <p>When you first visit, we ask whether you accept cookies. Analytics and the embedded Google Map load only if you accept. If you reject them, the rest of the website works normally. You can change your choice at any time with the “Cookie settings” link at the bottom of every page.</p>

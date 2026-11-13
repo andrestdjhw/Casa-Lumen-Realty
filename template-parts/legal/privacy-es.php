@@ -2,9 +2,9 @@
 <p>Esta Política de privacidad explica cómo Casa Lumen Realty (“Casa Lumen”, “nosotros”) recopila, usa y protege la información cuando visitas este sitio web o nos contactas a través de él. Al usar el sitio, aceptas las prácticas que se describen aquí.</p>
 
 <h2>Información que recopilamos</h2>
-<p><strong>Información que tú nos das.</strong> Cuando llenas un formulario de contacto, recopilamos la información que decides compartir: tu nombre, correo electrónico, teléfono, idioma preferido, el tipo de ayuda que te interesa y, si los proporcionas, tu zona de interés, plazo, rango de presupuesto, código postal y tipo de propiedad, y tu mensaje.</p>
+<p><strong>Información que tú nos das.</strong> Cuando llenas un formulario de contacto, recopilamos la información que decides compartir: tu nombre, correo electrónico, teléfono, idioma preferido, el tipo de ayuda que te interesa y, si los proporcionas, tu zona de interés, plazo y mensaje.</p>
 <p>No pedimos números de Seguro Social, datos bancarios, comprobantes de ingresos ni otra información financiera delicada a través de este sitio. Por favor no envíes esa información por nuestros formularios.</p>
-<p><strong>Información que se recopila automáticamente.</strong> Como la mayoría de los sitios web, nuestro servidor recibe información técnica como tu dirección IP, el tipo de navegador y las páginas que visitas. Para prevenir spam, guardamos temporalmente una versión codificada (hash) de tu dirección IP hasta por una hora después de que envías un formulario.</p>
+<p><strong>Información que se recopila automáticamente.</strong> Como la mayoría de los sitios web, nuestro servidor recibe información técnica como tu dirección IP, el tipo de navegador y las páginas que visitas.</p>
 
 <h2>Cómo usamos tu información</h2>
 <ul>
@@ -17,13 +17,14 @@
 <p>Solo te contactaremos por teléfono o correo electrónico sobre la consulta que enviaste. No vendemos tu información personal.</p>
 
 <h2>Cómo compartimos la información</h2>
-<p>Compartimos información solo cuando es necesario para atenderte u operar el sitio, por ejemplo con nuestros proveedores de correo y de hospedaje web. Con tu permiso, y solo cuando forma parte de tu transacción, podemos referirte a otros profesionales como prestamistas, inspectores o compañías de títulos. También podemos revelar información si la ley lo exige.</p>
+<p>Compartimos información solo cuando es necesario para atenderte u operar el sitio, por ejemplo con nuestros proveedores de correo y de hospedaje web. Los mensajes del formulario de contacto se entregan mediante EmailJS, un servicio de envío de correo, que manda tu consulta a nuestro equipo y una confirmación a ti. Con tu permiso, y solo cuando forma parte de tu transacción, podemos referirte a otros profesionales como prestamistas, inspectores o compañías de títulos. También podemos revelar información si la ley lo exige.</p>
 
 <h2>Cookies y servicios de terceros</h2>
 <p>Este sitio usa algunos servicios de Google que pueden recopilar información directamente desde tu navegador:</p>
 <ul>
   <li><strong>Google Fonts</strong>, para mostrar las tipografías del sitio.</li>
   <li><strong>Google Maps</strong>, para mostrar la ubicación de nuestra oficina y las zonas que atendemos. Los mapas insertados pueden usar cookies.</li>
+  <li><strong>Google reCAPTCHA</strong>, para proteger nuestros formularios de contacto contra el spam. Se carga cuando empiezas a llenar un formulario y analiza información técnica como tu navegador y tu interacción con la página. Su uso está sujeto a la Política de privacidad y los Términos del servicio de Google.</li>
   <li><strong>Analítica</strong>: podemos usar herramientas como Google Analytics para conocer el tráfico del sitio de forma agregada.</li>
 </ul>
 <p>En tu primera visita te preguntamos si aceptas las cookies. La analítica y el mapa de Google solo se cargan si las aceptas. Si las rechazas, el resto del sitio funciona con normalidad. Puedes cambiar tu elección en cualquier momento con el enlace “Configuración de cookies” al final de cada página.</p>

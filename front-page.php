@@ -106,7 +106,7 @@ get_header(); ?>
         </ul>
       </div>
 
-      <div class="relative lg:min-h-[720px]">
+      <div class="relative lg:min-h-[800px]">
         <!-- Formulario translúcido (sin la sombra rayada: se vería a través del vidrio). -->
         <div id="consultation" class="relative z-10 mx-4 -mt-20 mb-14 scroll-mt-28 sm:mx-auto sm:max-w-lg lg:absolute lg:top-1/2 lg:right-8 lg:m-0 lg:w-[340px] lg:-translate-y-1/2">
           <div

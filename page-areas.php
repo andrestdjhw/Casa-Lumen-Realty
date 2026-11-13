@@ -45,13 +45,33 @@ get_header(); ?>
     </div>
   </section>
 
+  <?php get_template_part('template-parts/role-grid', null, array(
+    'eyebrow' => __('Comparing areas', 'casa-lumen'),
+    'title'   => __('What to weigh before choosing where to live.', 'casa-lumen'),
+    'intro'   => __('Every community has its own mix of homes, routes, and rules. These are useful questions to research for any area on your list.', 'casa-lumen'),
+    'items'   => array(
+      array('icon' => 'car', 'title' => __('Commute and daily routes', 'casa-lumen'), 'text' => __('Drive the route at the hours you would actually travel: work, school, and errands.', 'casa-lumen')),
+      array('icon' => 'school', 'title' => __('Schools', 'casa-lumen'), 'text' => __('Confirm school assignments and programs directly with the school district for each address.', 'casa-lumen')),
+      array('icon' => 'home', 'title' => __('Type and age of homes', 'casa-lumen'), 'text' => __('Newer construction, established neighborhoods, and lot sizes vary from one area to another.', 'casa-lumen')),
+      array('icon' => 'building', 'title' => __('HOA and local rules', 'casa-lumen'), 'text' => __('Review association dues, restrictions, and city requirements before you commit.', 'casa-lumen')),
+      array('icon' => 'droplet', 'title' => __('Flood zones and insurance', 'casa-lumen'), 'text' => __('Check FEMA flood maps for the address and ask for insurance quotes early.', 'casa-lumen')),
+      array('icon' => 'dollar', 'title' => __('Property taxes', 'casa-lumen'), 'text' => __('Tax rates differ by city, county, and district, and can change the monthly cost.', 'casa-lumen')),
+    ),
+    'class'   => 'bg-cream-50',
+  )); ?>
+
   <?php get_template_part('template-parts/lead', null, array(
     'eyebrow'  => __('Discuss your preferred area', 'casa-lumen'),
     'title'    => __('Tell us where you are looking.', 'casa-lumen'),
     'intro'    => __('Share the communities you have in mind and what you want nearby. We will follow up with a conversation, not a sales pitch.', 'casa-lumen'),
     'source'   => 'areas-page',
-    'fields'   => 'area,timeline,message',
     'submit'   => __('Discuss Your Preferred Area', 'casa-lumen'),
+  )); ?>
+  <?php get_template_part('template-parts/faq-section', null, array(
+    'eyebrow'  => __('Relocation questions', 'casa-lumen'),
+    'faqs'     => clr_pick_faqs(array(3, 10, 0)),
+    'show_all' => true,
+    'class'    => 'bg-cream-50',
   )); ?>
 </main>
 

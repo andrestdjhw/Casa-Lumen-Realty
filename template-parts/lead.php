@@ -9,7 +9,6 @@
  *   @type string $intro
  *   @type string $source   Identificador del formulario para el correo y la analítica.
  *   @type string $interest Interés preseleccionado (buying, selling, investing, general).
- *   @type string $fields   Campos extra separados por coma (area, zip, budget, propertyType, timeline, message).
  *   @type string $submit   Texto del botón (CTA del brief).
  *   @type string $note     Opcional: aviso bajo el texto (p. ej. financiamiento).
  * }
@@ -52,7 +51,6 @@ $site = clr_site();
         data-variant="full"
         data-source="<?php echo esc_attr($args['source']); ?>"
         data-interest="<?php echo esc_attr($args['interest'] ?? ''); ?>"
-        data-fields="<?php echo esc_attr($args['fields'] ?? 'area,timeline,message'); ?>"
         data-submit="<?php echo esc_attr($args['submit'] ?? ''); ?>"
       >
         <!-- Fallback sin JavaScript -->

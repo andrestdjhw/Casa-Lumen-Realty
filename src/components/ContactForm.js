@@ -38,10 +38,11 @@ const THEMES = {
 }
 
 // Orden en que se enfoca el primer campo con error.
-const FIELD_ORDER = ["interest", "name", "email", "phone", "language", "budget", "zip", "propertyType", "area", "timeline", "message", "consent"]
+const FIELD_ORDER = ["interest", "name", "email", "phone", "language", "area", "timeline", "message", "consent"]
 
-// Campos extra por defecto de la variante "full" (página de contacto).
-const DEFAULT_FULL_FIELDS = ["area", "timeline", "message"]
+// Formulario estándar: los mismos campos en todo el sitio, para que cada correo de lead
+// llegue completo y coincida con la plantilla de EmailJS.
+const EXTRA_FIELDS = ["area", "timeline", "message"]
 
 function Field({ id, label, optional, error, t, theme, children }) {
   return (
@@ -67,9 +68,72 @@ function validate(values) {
   if (values.phone.replace(/\D/g, "").length < 10) errors.phone = "invalidPhone"
   if (!values.interest) errors.interest = "required"
   if (!values.language) errors.language = "required"
-  if (values.zip && !/^\d{5}$/.test(values.zip)) errors.zip = "invalidZip"
   if (!values.consent) errors.consent = "consentNeeded"
   return errors
+}
+
+// reCAPTCHA v3: el script se carga solo cuando alguien empieza a llenar un formulario
+// (no en cada visita). Una sola carga para todos los formularios de la página.
+let recaptchaPromise = null
+function loadRecaptcha(siteKey) {
+  if (!siteKey) return Promise.resolve(null)
+  if (!recaptchaPromise) {
+    recaptchaPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script")
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`
+      script.async = true
+      script.onload = () => window.grecaptcha.ready(() => resolve(window.grecaptcha))
+      script.onerror = () => {
+        recaptchaPromise = null
+        reject(new Error("reCAPTCHA failed to load"))
+      }
+      document.head.append(script)
+    })
+  }
+  return recaptchaPromise
+}
+
+// Cada token sirve una sola vez: se pide uno por envío.
+async function recaptchaToken(siteKey, action) {
+  const grecaptcha = await loadRecaptcha(siteKey)
+  return grecaptcha ? grecaptcha.execute(siteKey, { action }) : ""
+}
+
+// API REST de EmailJS (sin dependencia extra). EmailJS verifica el token si la plantilla
+// tiene reCAPTCHA activado con la secret key.
+async function sendEmail(emailjs, templateId, params, siteKey) {
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: emailjs.serviceId,
+      template_id: templateId,
+      user_id: emailjs.publicKey,
+      template_params: { ...params, "g-recaptcha-response": await recaptchaToken(siteKey, "contact") }
+    })
+  })
+  if (!res.ok) throw new Error(`EmailJS ${res.status}: ${await res.text()}`)
+}
+
+// Aviso de reCAPTCHA con enlaces: "{privacy}" y "{terms}" se reemplazan por <a>.
+function RecaptchaNotice({ t, className }) {
+  const links = {
+    privacy: ["https://policies.google.com/privacy", t.googlePrivacy],
+    terms: ["https://policies.google.com/terms", t.googleTerms]
+  }
+  return (
+    <p className={className}>
+      {t.recaptcha.split(/\{(privacy|terms)\}/).map((part, i) =>
+        links[part] ? (
+          <a key={i} href={links[part][0]} target="_blank" rel="noopener" className="underline underline-offset-2">
+            {links[part][1]}
+          </a>
+        ) : (
+          part
+        )
+      )}
+    </p>
+  )
 }
 
 function trackLead(interest) {
@@ -80,14 +144,13 @@ function trackLead(interest) {
   if (leadEvents[interest]) window.dataLayer.push({ event: leadEvents[interest] })
 }
 
-function ContactForm({ config, variant = "full", source = "", title, intro, interest = "", fields, submit, tone = "light", dense = false }) {
+function ContactForm({ config, variant = "full", source = "", title, intro, interest = "", submit, tone = "light", dense = false }) {
   const { form, lang } = config
-  const { i18n: t, options, endpoint } = form
+  const { i18n: t, options, emailjs, recaptcha } = form
   const full = variant === "full"
   const theme = THEMES[tone] || THEMES.light
   // "dense": versión más compacta (formulario del hero, pedido del cliente).
   const inputClass = dense ? `${theme.input} py-2! text-[13px]!` : theme.input
-  const extraFields = fields ? fields.split(",").map(f => f.trim()).filter(Boolean) : full ? DEFAULT_FULL_FIELDS : []
   const uid = useRef(`cf-${source || variant}`).current
   const startedAt = useRef(Date.now())
   const formRef = useRef(null)
@@ -98,9 +161,6 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
     phone: "",
     language: lang,
     interest,
-    budget: "",
-    zip: "",
-    propertyType: "",
     area: "",
     timeline: "",
     message: "",
@@ -131,36 +191,48 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
       return
     }
 
+    // Anti-spam: honeypot lleno o envío en menos de 3 s. Se muestra "éxito" sin enviar nada.
+    if (values.website || Date.now() - startedAt.current < 3000) {
+      setStatus("success")
+      return
+    }
+
+    // Variables disponibles en las plantillas de EmailJS: {{name}}, {{email}}, {{phone}}, ...
+    const label = (field, value) => (value ? options[field]?.[value] || value : "—")
+    const params = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      reply_to: values.email.trim(),
+      phone: values.phone.trim(),
+      interest: label("interest", values.interest),
+      title: label("interest", values.interest),
+      language: label("language", values.language),
+      area: values.area.trim() || "—",
+      timeline: label("timeline", values.timeline),
+      message: values.message.trim() || "—",
+      form: source || variant,
+      page: window.location.href,
+      site_language: lang
+    }
+
     setStatus("sending")
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...values,
-          source,
-          page: window.location.href,
-          elapsed: Date.now() - startedAt.current
-        })
-      })
-      const body = await res.json().catch(() => ({}))
-
-      if (res.ok) {
-        trackLead(values.interest)
-        setStatus("success")
-        return
-      }
-      if (body?.data?.fields) {
-        setErrors(body.data.fields)
-        focusFirstError(body.data.fields)
-        setStatus("idle")
-        return
-      }
+      await sendEmail(emailjs, emailjs.contactTemplate, params, recaptcha)
+    } catch (err) {
+      console.error(err)
       setStatus("error")
-    } catch {
-      setStatus("error")
+      return
     }
+
+    trackLead(values.interest)
+    setStatus("success")
+
+    // Auto-respuesta al cliente: si falla, el lead ya llegó; no se muestra error.
+    sendEmail(emailjs, emailjs.autoReplyTemplate, params, recaptcha).catch(err => console.error(err))
   }
+
+  // Precarga reCAPTCHA en cuanto alguien entra al formulario.
+  const onFocus = () => loadRecaptcha(recaptcha).catch(() => {})
 
   if (status === "success") {
     return (
@@ -189,7 +261,7 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
 
     let control
     if (name === "message") {
-      control = <textarea {...common} rows={4} maxLength={2000} />
+      control = <textarea {...common} rows={dense ? 2 : 4} maxLength={2000} />
     } else if (options[name]) {
       control = (
         <select {...common}>
@@ -201,14 +273,12 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
           ))}
         </select>
       )
-    } else if (name === "zip") {
-      control = <input {...common} type="text" inputMode="numeric" autoComplete="postal-code" maxLength={5} />
     } else {
       control = <input {...common} type="text" />
     }
 
     return (
-      <div key={name} className={name === "message" && full ? "sm:col-span-2" : ""}>
+      <div key={name} className={name === "message" ? (full ? "sm:col-span-2" : "col-span-2") : ""}>
         <Field id={id} label={t[name]} optional error={errors[name]} t={t} theme={theme}>
           {control}
         </Field>
@@ -217,7 +287,7 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate>
+    <form ref={formRef} onSubmit={onSubmit} onFocus={onFocus} noValidate>
       {title && <h2 className={`font-serif leading-tight ${dense ? "text-xl" : "text-2xl"} ${theme.title}`}>{title}</h2>}
       {intro && <p className={`mt-2 leading-relaxed ${dense ? "text-xs" : "text-sm"} ${theme.intro}`}>{intro}</p>}
 
@@ -266,7 +336,8 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
           </Field>
         </div>
 
-        {extraFields.map(renderExtra)}
+        {/* En el formulario compacto, zona y plazo van lado a lado para no alargarlo. */}
+        {full ? EXTRA_FIELDS.map(renderExtra) : <div className="grid grid-cols-2 gap-3">{EXTRA_FIELDS.map(renderExtra)}</div>}
 
         {/* Honeypot: invisible para personas, los bots suelen llenarlo. */}
         <div className="absolute left-[-9999px]" aria-hidden="true">
@@ -302,6 +373,7 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
           <p role="alert" className={`mt-2 text-xs empty:hidden ${theme.error}`}>
             {status === "error" ? t.error : ""}
           </p>
+          {recaptcha && <RecaptchaNotice t={t} className={`mt-3 text-[11px] leading-relaxed ${theme.muted}`} />}
         </div>
       </div>
     </form>

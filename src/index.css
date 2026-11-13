@@ -182,3 +182,9 @@
       repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 22px) bottom / 100% 7px no-repeat;
   }
 }
+
+/* reCAPTCHA v3: se oculta la insignia flotante (chocaba con el botón de llamar).
+   Google lo permite si el formulario muestra el aviso, que va bajo cada botón de envío. */
+.grecaptcha-badge {
+  visibility: hidden;
+}
