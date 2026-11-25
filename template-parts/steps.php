@@ -7,6 +7,7 @@
  *   @type string $title
  *   @type array  $steps  Lista de array('title' => ..., 'text' => ...).
  *   @type string $class  Clases de fondo de la sección.
+ *   @type string $image  Opcional: foto pequeña junto al título.
  * }
  */
 
@@ -15,9 +16,16 @@ $cols  = count($steps) === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3
 ?>
 <section class="<?php echo esc_attr($args['class'] ?? 'bg-cream-50'); ?> py-20 lg:py-24">
   <div class="mx-auto max-w-site px-4 sm:px-6">
-    <div class="max-w-2xl">
-      <p class="eyebrow"><?php echo esc_html($args['eyebrow']); ?></p>
-      <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php echo esc_html($args['title']); ?></h2>
+    <div class="flex items-end justify-between gap-10">
+      <div class="max-w-2xl">
+        <p class="eyebrow"><?php echo esc_html($args['eyebrow']); ?></p>
+        <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php echo esc_html($args['title']); ?></h2>
+      </div>
+      <?php if (!empty($args['image'])) { ?>
+        <div class="plane hidden shrink-0 sm:block">
+          <div class="size-44 overflow-hidden bg-white lg:size-52"><?php echo clr_image($args['image'], '', 'size-full object-cover', false, '208px'); ?></div>
+        </div>
+      <?php } ?>
     </div>
 
     <ol class="mt-14 grid gap-12 md:gap-10 <?php echo $cols; ?>">

@@ -13,7 +13,9 @@ get_header(); ?>
     'eyebrow'   => __('Buy a home in San Antonio', 'casa-lumen'),
     'title'     => __('Find a home with a plan, not just a search.', 'casa-lumen'),
     'intro'     => __('The right home starts with understanding your needs, budget considerations, timeline, and the steps ahead. We help you approach the purchase process with clearer expectations.', 'casa-lumen'),
-    'image'     => 'service-buy.jpg',
+    // La foto de mayor resolución de Yolanda (1536 px); la del porche (1024 px) se veía borrosa aquí.
+    'image'     => 'yolanda-plans.jpg',
+    'image_position' => 'object-[center_25%]',
     'cta_label' => __('Talk About Buying a Home', 'casa-lumen'),
   )); ?>
 
@@ -30,7 +32,7 @@ get_header(); ?>
   )); ?>
 
   <?php get_template_part('template-parts/info-cards', null, array(
-    'class' => 'bg-cream-50',
+    'class' => 'tex tex-wood bg-cream-50',
     'items' => array(
       array(
         'id'      => 'first-time-buyers',
@@ -98,7 +100,7 @@ get_header(); ?>
     'body'    => __('Start years before you are ready, or start today. You set the pace.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
     'href'    => clr_url('/faq/'),
-    'image'   => 'service-relocate.jpg',
+    'image'   => 'brand-folder.jpg',
   )); ?>
 </main>
 

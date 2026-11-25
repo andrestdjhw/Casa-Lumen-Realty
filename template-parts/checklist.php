@@ -13,7 +13,7 @@
  * }
  */
 ?>
-<section class="<?php echo esc_attr($args['class'] ?? 'bg-cream-100'); ?> py-20 lg:py-24">
+<section class="<?php echo esc_attr($args['class'] ?? 'tex tex-plaster bg-cream-100'); ?> py-20 lg:py-24">
   <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
     <div>
       <p class="eyebrow"><?php echo esc_html($args['eyebrow']); ?></p>

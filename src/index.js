@@ -6,8 +6,10 @@ import ContactForm from "./components/ContactForm"
 import CookieConsent from "./components/CookieConsent"
 import MapEmbed from "./components/MapEmbed"
 import initCardTilt from "./cardTilt"
+import initMotion from "./motion"
 
 initCardTilt()
+initMotion()
 
 // window.casaLumen lo inyecta functions.php (clr_js_config()).
 const config = window.casaLumen

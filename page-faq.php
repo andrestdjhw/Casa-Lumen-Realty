@@ -34,7 +34,7 @@ get_header(); ?>
   )); ?>
 
   <!-- Glosario: términos frecuentes en una compra o venta en Texas (información general). -->
-  <section class="bg-cream-200 py-20 lg:py-24">
+  <section class="tex tex-stone bg-cream-200 py-20 lg:py-24">
     <div class="mx-auto max-w-site px-4 sm:px-6">
       <div class="max-w-2xl">
         <p class="eyebrow"><?php esc_html_e('Glossary', 'casa-lumen'); ?></p>
@@ -65,6 +65,7 @@ get_header(); ?>
   </section>
 
   <?php get_template_part('template-parts/cta-band', null, array(
+    'image'   => 'brand-subway.jpg',
     'eyebrow' => __('Ask a question', 'casa-lumen'),
     'body'    => __('Tell us what you are planning, and our team can follow up about the next step.', 'casa-lumen'),
     'label'   => __('Ask a Question', 'casa-lumen'),

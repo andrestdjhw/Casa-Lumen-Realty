@@ -448,40 +448,43 @@ function ContactForm({
           className: `mt-1 text-xs ${theme.error}`,
           children: t[errors.interest]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Field, {
-        id: `${uid}-name`,
-        label: t.name,
-        error: errors.name,
-        t: t,
-        theme: theme,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: full ? "contents" : "grid grid-cols-2 gap-3",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Field, {
           id: `${uid}-name`,
-          name: "name",
-          type: "text",
-          autoComplete: "name",
-          value: values.name,
-          onChange: set("name"),
-          className: inputClass,
-          "aria-invalid": !!errors.name,
-          "aria-describedby": describedBy("name")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Field, {
-        id: `${uid}-email`,
-        label: t.email,
-        error: errors.email,
-        t: t,
-        theme: theme,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          label: t.name,
+          error: errors.name,
+          t: t,
+          theme: theme,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            id: `${uid}-name`,
+            name: "name",
+            type: "text",
+            autoComplete: "name",
+            value: values.name,
+            onChange: set("name"),
+            className: inputClass,
+            "aria-invalid": !!errors.name,
+            "aria-describedby": describedBy("name")
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Field, {
           id: `${uid}-email`,
-          name: "email",
-          type: "email",
-          autoComplete: "email",
-          value: values.email,
-          onChange: set("email"),
-          className: inputClass,
-          "aria-invalid": !!errors.email,
-          "aria-describedby": describedBy("email")
-        })
+          label: t.email,
+          error: errors.email,
+          t: t,
+          theme: theme,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            id: `${uid}-email`,
+            name: "email",
+            type: "email",
+            autoComplete: "email",
+            value: values.email,
+            onChange: set("email"),
+            className: inputClass,
+            "aria-invalid": !!errors.email,
+            "aria-describedby": describedBy("email")
+          })
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: `grid grid-cols-[1.3fr_1fr] gap-3 ${full ? "sm:col-span-2 sm:grid-cols-2 sm:gap-4" : ""}`,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Field, {
@@ -1678,6 +1681,261 @@ function useConsent() {
 
 /***/ },
 
+/***/ "./src/magicHat.js"
+/*!*************************!*\
+  !*** ./src/magicHat.js ***!
+  \*************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ initMagicHat)
+/* harmony export */ });
+// Entrada "sombrero de mago" para el formulario del hero (inspirada en silvercrestus.com):
+// la tarjeta sale de abajo aplastada, girada y borrosa, se estira con un rebote elástico,
+// suelta una nube de humo y chispas doradas, y al final entra su contenido escalonado.
+//
+// Web Animations API (sin GSAP). Se activa con [data-magic-hat] y solo con html.js-motion
+// (sin "reducir movimiento"). Antes de animar, la tarjeta está oculta por CSS.
+
+const SPARK_COLORS = ["var(--color-gold-300)", "var(--color-gold-500)", "var(--color-cream-50)", "#ffffff"];
+const POWER3_OUT = "cubic-bezier(0.215, 0.61, 0.355, 1)";
+
+// Rebote elástico (amplitud 1, periodo 0.55) muestreado para la función CSS linear().
+function elasticEasing() {
+  const period = 0.55;
+  const shift = period / 4;
+  const points = Array.from({
+    length: 49
+  }, (_, i) => {
+    const t = i / 48;
+    return (Math.pow(2, -10 * t) * Math.sin((t - shift) * 2 * Math.PI / period) + 1).toFixed(3);
+  });
+  points[0] = "0";
+  points[48] = "1";
+  const easing = `linear(${points.join(", ")})`;
+  return CSS.supports("animation-timing-function", easing) ? easing : "cubic-bezier(0.34, 1.56, 0.64, 1)";
+}
+const random = (min, max) => min + Math.random() * (max - min);
+function play(card) {
+  const host = card.parentElement;
+
+  // Humo y chispas: capa vacía centrada en la base de la tarjeta.
+  const fx = document.createElement("div");
+  fx.className = "magic-fx";
+  fx.setAttribute("aria-hidden", "true");
+  const poof = document.createElement("span");
+  poof.className = "magic-poof";
+  fx.append(poof);
+  const sparks = Array.from({
+    length: 18
+  }, (_, i) => {
+    const spark = document.createElement("span");
+    spark.className = "magic-spark";
+    spark.style.background = SPARK_COLORS[i % SPARK_COLORS.length];
+    fx.append(spark);
+    return spark;
+  });
+  host.append(fx);
+  card.classList.add("is-visible");
+  card.style.transformOrigin = "50% 100%";
+
+  // 1) Sale del sombrero (0.55 s) y 2) se acomoda con rebote elástico (1 s).
+  const total = 1550;
+  const entrance = card.animate([{
+    opacity: 0,
+    transform: "translateY(180px) scale(0.08, 0.25) rotate(-8deg)",
+    filter: "blur(8px)",
+    easing: POWER3_OUT
+  }, {
+    opacity: 1,
+    transform: "translateY(-14px) scale(0.32, 1.08) rotate(3deg)",
+    filter: "blur(2px)",
+    offset: 550 / total,
+    easing: elasticEasing()
+  }, {
+    opacity: 1,
+    transform: "none",
+    filter: "blur(0px)"
+  }], {
+    duration: total,
+    fill: "backwards"
+  });
+
+  // Nube de humo.
+  poof.animate([{
+    transform: "scale(0)",
+    opacity: 0.75
+  }, {
+    transform: "scale(1.8)",
+    opacity: 0
+  }], {
+    duration: 900,
+    delay: 50,
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+    fill: "both"
+  });
+
+  // Chispas en direcciones al azar, hacia arriba.
+  sparks.forEach((spark, i) => {
+    spark.animate([{
+      transform: "translate(0, 0) scale(0) rotate(0deg)",
+      opacity: 1
+    }, {
+      transform: `translate(${random(-240, 240)}px, ${random(-300, -60)}px) scale(${random(0.6, 1.5)}) rotate(${random(-180, 180)}deg)`,
+      opacity: 0
+    }], {
+      duration: random(900, 1400),
+      delay: 500 + i * 15,
+      easing: POWER3_OUT,
+      fill: "both"
+    });
+  });
+
+  // 3) El contenido (título, texto y campos) entra escalonado.
+  card.querySelectorAll(":scope form > h2, :scope form > p, :scope form > div > *").forEach((el, i) => {
+    el.animate([{
+      opacity: 0,
+      transform: "translateY(18px)"
+    }, {
+      opacity: 1,
+      transform: "none"
+    }], {
+      duration: 600,
+      delay: 950 + i * 50,
+      easing: POWER3_OUT,
+      fill: "backwards"
+    });
+  });
+  entrance.finished.then(() => {
+    card.style.removeProperty("transform-origin");
+    setTimeout(() => fx.remove(), 1200);
+  });
+}
+function initMagicHat() {
+  if (!document.documentElement.classList.contains("js-motion")) return;
+  document.querySelectorAll("[data-magic-hat]").forEach(card => {
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) {
+        io.disconnect();
+        // Pequeña pausa para que React termine de montar el formulario.
+        setTimeout(() => play(card), 350);
+      }
+    }, {
+      rootMargin: "0px 0px -5% 0px"
+    });
+    io.observe(card.parentElement);
+  });
+}
+
+/***/ },
+
+/***/ "./src/motion.js"
+/*!***********************!*\
+  !*** ./src/motion.js ***!
+  \***********************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ initMotion)
+/* harmony export */ });
+/* harmony import */ var _magicHat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./magicHat */ "./src/magicHat.js");
+
+
+// Animaciones de scroll del sitio (branding "a plena luz": las cosas aparecen, no saltan).
+//
+// - Revelado: títulos, reglas, tarjetas y bloques entran con un fundido hacia arriba,
+//   escalonados entre hermanos. Se aplica solo a secciones después del hero.
+// - [data-parallax="0.15"]: el elemento se desplaza más lento que la página.
+//
+// Sin JavaScript o con "reducir movimiento", todo se ve normal: la clase js-motion
+// del <html> es la que activa los estados iniciales en CSS.
+
+const REVEAL = ["h2", ".eyebrow", ".ruler", ".plane", ".reveal-wipe", "ol > li", "details", "dl > div", "blockquote", ".btn-primary", "[data-reveal]"].join(",");
+function initReveal() {
+  const sections = document.querySelectorAll("main > section:not(:first-child), main > * + section");
+  const targets = [];
+  sections.forEach(section => {
+    section.querySelectorAll(REVEAL).forEach(el => {
+      // Un solo nivel: si un ancestro ya se revela, el hijo viaja con él.
+      if (el.parentElement.closest(".reveal") || el.closest(".marquee, form, [data-clr-map]")) return;
+      el.classList.add("reveal");
+      targets.push(el);
+    });
+  });
+
+  // Escalonado entre hermanos revelados (máx. 6 pasos).
+  targets.forEach(el => {
+    const siblings = [...el.parentElement.children].filter(c => c.classList.contains("reveal"));
+    const i = Math.min(siblings.indexOf(el), 6);
+    if (i > 0) el.style.setProperty("--reveal-delay", `${i * 90}ms`);
+  });
+
+  // La regla empieza recortada (área 0) y el observador no la detectaría: se vigila su
+  // contenedor y, al entrar, se revelan todos los elementos asociados a él.
+  const groups = new Map();
+  targets.forEach(el => {
+    const watched = el.classList.contains("ruler") ? el.parentElement : el;
+    if (!groups.has(watched)) groups.set(watched, []);
+    groups.get(watched).push(el);
+  });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        groups.get(entry.target).forEach(el => el.classList.add("is-visible"));
+        io.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: "0px 0px -8% 0px",
+    threshold: 0.12
+  });
+  groups.forEach((_, watched) => io.observe(watched));
+}
+function initParallax() {
+  const items = [...document.querySelectorAll("[data-parallax]")];
+  if (!items.length) return;
+  let ticking = false;
+  const update = () => {
+    const vh = window.innerHeight;
+    items.forEach(el => {
+      const rect = el.parentElement.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > vh) return;
+      const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+      el.style.transform = `translate3d(0, ${(progress * parseFloat(el.dataset.parallax) * 100).toFixed(2)}px, 0) scale(1.15)`;
+    });
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener("scroll", onScroll, {
+    passive: true
+  });
+  window.addEventListener("resize", onScroll);
+  update();
+}
+function initMotion() {
+  window.clrMotionReady = true;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    document.documentElement.classList.remove("js-motion");
+    return;
+  }
+  document.documentElement.classList.add("js-motion");
+  const start = () => {
+    initReveal();
+    initParallax();
+    (0,_magicHat__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);else start();
+}
+
+/***/ },
+
 /***/ "react"
 /*!************************!*\
   !*** external "React" ***!
@@ -1799,8 +2057,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CookieConsent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/CookieConsent */ "./src/components/CookieConsent.js");
 /* harmony import */ var _components_MapEmbed__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/MapEmbed */ "./src/components/MapEmbed.js");
 /* harmony import */ var _cardTilt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cardTilt */ "./src/cardTilt.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _motion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./motion */ "./src/motion.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
+
 
 
 
@@ -1811,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_cardTilt__WEBPACK_IMPORTED_MODULE_7__["default"])();
+(0,_motion__WEBPACK_IMPORTED_MODULE_8__["default"])();
 
 // window.casaLumen lo inyecta functions.php (clr_js_config()).
 const config = window.casaLumen;
@@ -1818,7 +2079,7 @@ const mounts = [["#clr-navbar", _components_Navbar__WEBPACK_IMPORTED_MODULE_2__[
 mounts.forEach(([selector, Component]) => {
   const el = document.querySelector(selector);
   if (el && config) {
-    react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Component, {
+    react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Component, {
       config: config
     }));
   }
@@ -1837,7 +2098,7 @@ document.querySelectorAll("[data-clr-contact-form]").forEach(el => {
     tone,
     dense
   } = el.dataset;
-  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ContactForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_ContactForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
     config: config,
     variant: variant,
     source: source,
@@ -1859,7 +2120,7 @@ document.querySelectorAll("[data-clr-map]").forEach(el => {
     title,
     compact
   } = el.dataset;
-  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_MapEmbed__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_MapEmbed__WEBPACK_IMPORTED_MODULE_6__["default"], {
     site: config.site,
     i18n: config.i18n,
     className: "size-full",
@@ -1874,7 +2135,7 @@ document.querySelectorAll("[data-clr-map]").forEach(el => {
 if (config) {
   const cookieRoot = document.createElement("div");
   document.body.append(cookieRoot);
-  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(cookieRoot).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_CookieConsent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(cookieRoot).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_CookieConsent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     config: config
   }));
 }

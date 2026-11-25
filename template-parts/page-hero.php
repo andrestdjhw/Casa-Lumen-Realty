@@ -7,6 +7,7 @@
  *   @type string $title
  *   @type string $intro
  *   @type string $image     Archivo de assets/images (opcional).
+ *   @type string $image_position Clase object-position opcional (p. ej. object-top).
  *   @type string $cta_label Opcional; ancla a la sección del formulario (#lead).
  *   @type string $cta_href  Opcional, por defecto #lead.
  * }
@@ -17,7 +18,7 @@ $image = $args['image'] ?? '';
 ?>
 <section class="relative overflow-hidden bg-cream-200">
   <div class="mx-auto grid max-w-site <?php echo $image ? 'lg:grid-cols-[1fr_0.9fr]' : ''; ?>">
-    <div class="px-4 pt-10 pb-16 sm:px-6 lg:pt-14 lg:pb-24 <?php echo $image ? 'lg:pr-12' : 'max-w-4xl'; ?>">
+    <div class="intro-stagger px-4 pt-10 pb-16 sm:px-6 lg:pt-14 lg:pb-24 <?php echo $image ? 'lg:pr-12' : 'max-w-4xl'; ?>">
       <nav aria-label="<?php esc_attr_e('Breadcrumb', 'casa-lumen'); ?>" class="text-xs text-ink/55">
         <ol class="flex items-center gap-2">
           <li><a href="<?php echo esc_url(clr_url('/')); ?>" class="hover:text-gold-600"><?php esc_html_e('Home', 'casa-lumen'); ?></a></li>
@@ -48,8 +49,8 @@ $image = $args['image'] ?? '';
 
     <?php if ($image) { ?>
       <div class="relative h-80 sm:h-[26rem] lg:h-auto">
-        <div class="absolute inset-0 lg:right-[min(0px,calc((var(--container-site)-100vw)/2))]">
-          <?php echo clr_image($image, '', 'size-full object-cover', true, '(min-width: 1024px) 50vw, 100vw'); ?>
+        <div class="absolute inset-0 overflow-hidden lg:right-[min(0px,calc((var(--container-site)-100vw)/2))]">
+          <?php echo clr_image($image, '', 'kenburns size-full object-cover ' . ($args['image_position'] ?? ''), true, '(min-width: 1024px) 50vw, 100vw'); ?>
         </div>
       </div>
     <?php } ?>

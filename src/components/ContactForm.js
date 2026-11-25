@@ -312,6 +312,8 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
           )}
         </fieldset>
 
+        {/* En el formulario compacto, nombre y correo van lado a lado para que no sea tan alto. */}
+        <div className={full ? "contents" : "grid grid-cols-2 gap-3"}>
         <Field id={`${uid}-name`} label={t.name} error={errors.name} t={t} theme={theme}>
           <input id={`${uid}-name`} name="name" type="text" autoComplete="name" value={values.name} onChange={set("name")} className={inputClass} aria-invalid={!!errors.name} aria-describedby={describedBy("name")} />
         </Field>
@@ -319,6 +321,7 @@ function ContactForm({ config, variant = "full", source = "", title, intro, inte
         <Field id={`${uid}-email`} label={t.email} error={errors.email} t={t} theme={theme}>
           <input id={`${uid}-email`} name="email" type="email" autoComplete="email" value={values.email} onChange={set("email")} className={inputClass} aria-invalid={!!errors.email} aria-describedby={describedBy("email")} />
         </Field>
+        </div>
 
         <div className={`grid grid-cols-[1.3fr_1fr] gap-3 ${full ? "sm:col-span-2 sm:grid-cols-2 sm:gap-4" : ""}`}>
           <Field id={`${uid}-phone`} label={t.phone} error={errors.phone} t={t} theme={theme}>

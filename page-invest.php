@@ -41,7 +41,7 @@ get_header(); ?>
       array('title' => __('Financing costs', 'casa-lumen'), 'text' => __('Loan terms for investment property can differ. A licensed lender can explain them.', 'casa-lumen')),
     ),
     'note'    => __('This page offers general information only. It is not tax, legal, or investment advice.', 'casa-lumen'),
-    'class'   => 'bg-cream-100',
+    'class'   => 'tex tex-plaster bg-cream-100',
   )); ?>
 
   <section class="bg-cream-50 py-20 lg:py-24">
@@ -77,7 +77,7 @@ get_header(); ?>
     'body'    => __('Start with the answers to common questions, then reach out when you are ready.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
     'href'    => clr_url('/faq/'),
-    'image'   => 'area-converse.jpg',
+    'image'   => 'brand-sign.jpg',
   )); ?>
 </main>
 

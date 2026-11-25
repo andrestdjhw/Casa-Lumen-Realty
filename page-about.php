@@ -15,7 +15,9 @@ get_header(); ?>
     'eyebrow'   => __('About Casa Lumen Realty', 'casa-lumen'),
     'title'     => __('Local knowledge. Thoughtful guidance.', 'casa-lumen'),
     'intro'     => __('Casa Lumen Realty is built around the belief that real estate decisions deserve time, clarity, and honest conversations. Our focus is helping clients understand the process and make decisions that fit their goals.', 'casa-lumen'),
-    'image'     => 'about-interior.jpg',
+    // Folder de la marca (2000 px). Las fotos de Yolanda miden 1024–1536 px y se ven borrosas a este tamaño;
+    // el gafete se descartó aquí porque a este tamaño se lee el cargo "Broker" (pendiente de TREC).
+    'image'     => 'brand-folder.jpg',
     'cta_label' => __('Connect With Casa Lumen', 'casa-lumen'),
     'cta_href'  => clr_url('/contact/'),
   )); ?>
@@ -24,7 +26,7 @@ get_header(); ?>
     <div class="mx-auto grid max-w-site gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
       <div class="plane">
         <div class="relative aspect-[4/5] bg-white">
-          <?php echo clr_image('yolanda-office.jpg', __('Yolanda H. Barboza', 'casa-lumen'), 'absolute inset-0 size-full object-cover', false, '(min-width: 1024px) 50vw, 100vw'); ?>
+          <?php echo clr_image('yolanda-walkthrough.jpg', __('Yolanda H. Barboza on a home walkthrough with clients', 'casa-lumen'), 'absolute inset-0 size-full object-cover object-top', false, '(min-width: 1024px) 50vw, 100vw'); ?>
         </div>
       </div>
       <div>
@@ -54,6 +56,52 @@ get_header(); ?>
           <p class="font-serif text-2xl leading-snug text-ink"><?php esc_html_e('See it all. Then decide.', 'casa-lumen'); ?></p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Cita de la propuesta de marca. VALIDAR: confirmar con Yolanda que la firma como suya. -->
+  <section class="tex tex-stone bg-cream-200 py-20 lg:py-28">
+    <figure class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+      <?php echo clr_seal('mx-auto size-24', ''); ?>
+      <blockquote class="mt-10 font-serif text-3xl leading-snug text-navy-900 sm:text-5xl sm:leading-tight">
+        “<?php esc_html_e('Real estate isn’t just about buildings. It’s about what comes next.', 'casa-lumen'); ?>”
+      </blockquote>
+      <span class="ruler mx-auto mt-10 block max-w-xs text-gold-500" aria-hidden="true"></span>
+      <figcaption class="mt-6 text-sm font-semibold tracking-wide text-ink/70">Yolanda H. Barboza · Casa Lumen Realty</figcaption>
+    </figure>
+  </section>
+
+  <!-- En el camino: fotos de Yolanda con clientes. -->
+  <section class="bg-cream-100 py-20 lg:py-24">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-end">
+        <div>
+          <p class="eyebrow"><?php esc_html_e('Side by side', 'casa-lumen'); ?></p>
+          <h2 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><?php esc_html_e('From the first visit to the last signature.', 'casa-lumen'); ?></h2>
+        </div>
+        <p class="text-[17px] leading-relaxed text-ink/75"><?php esc_html_e('Walkthroughs, plans, and paperwork are easier with someone who explains each detail as it comes up.', 'casa-lumen'); ?></p>
+      </div>
+      <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr]">
+        <?php
+        $moments = array(
+          array('yolanda-porch.jpg', __('Visiting a property', 'casa-lumen'), __('Yolanda H. Barboza visiting a property with clients', 'casa-lumen')),
+          array('yolanda-plans.jpg', __('Reviewing the details', 'casa-lumen'), __('Yolanda H. Barboza reviewing plans with clients', 'casa-lumen')),
+          array('yolanda-tour.jpg', __('Walking through each space', 'casa-lumen'), __('Yolanda H. Barboza touring a home with clients', 'casa-lumen')),
+        );
+        foreach ($moments as $i => $moment) { ?>
+          <li class="plane <?php echo $i === 1 ? 'sm:col-span-2 lg:col-span-1' : ''; ?>">
+            <figure class="group bg-white">
+              <div class="h-80 overflow-hidden lg:h-[26rem]">
+                <?php echo clr_image($moment[0], $moment[2], 'size-full object-cover transition-transform duration-[1.2s] group-hover:scale-105', false, '(min-width: 1024px) 33vw, 100vw'); ?>
+              </div>
+              <figcaption class="flex items-center gap-3 px-5 py-4 text-sm font-semibold text-ink">
+                <span class="font-serif text-gold-600"><?php echo esc_html(sprintf('%02d', $i + 1)); ?></span>
+                <?php echo esc_html($moment[1]); ?>
+              </figcaption>
+            </figure>
+          </li>
+        <?php } ?>
+      </ul>
     </div>
   </section>
 
@@ -92,10 +140,11 @@ get_header(); ?>
       array('icon' => 'map-pin', 'title' => __('Families relocating', 'casa-lumen'), 'text' => __('For those moving to the San Antonio area and comparing communities.', 'casa-lumen'), 'url' => clr_url('/areas/'), 'link' => __('Explore Areas', 'casa-lumen')),
       array('icon' => 'chart', 'title' => __('Property investors', 'casa-lumen'), 'text' => __('For those weighing goals, timelines, and holding costs.', 'casa-lumen'), 'url' => clr_url('/invest/'), 'link' => __('Learn About Investing', 'casa-lumen')),
     ),
-    'class'   => 'bg-cream-100',
+    'class'   => 'tex tex-plaster bg-cream-100',
   )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(
+    'image'   => 'yolanda-review.jpg',
     'eyebrow' => __('Connect with Casa Lumen', 'casa-lumen'),
     'body'    => __('Whether you have a timeline or are still exploring, reach out to discuss your next move.', 'casa-lumen'),
     'label'   => __('Connect With Casa Lumen', 'casa-lumen'),

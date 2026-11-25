@@ -15,11 +15,11 @@ get_header(); ?>
     'eyebrow'   => __('San Antonio & surrounding areas', 'casa-lumen'),
     'title'     => __('Real estate guidance in San Antonio and nearby communities.', 'casa-lumen'),
     'intro'     => __('Explore real estate decisions with local context. Neighborhood priorities, property types, commute patterns, and market conditions can vary from one community to another.', 'casa-lumen'),
-    'image'     => 'area-san-antonio.jpg',
+    'image'     => 'san-antonio-skyline.jpg',
     'cta_label' => __('Discuss Your Preferred Area', 'casa-lumen'),
   )); ?>
 
-  <section class="bg-bronze-800 py-20 text-white lg:py-24">
+  <section class="tex tex-wood-dark bg-bronze-800 py-20 text-white lg:py-24">
     <div class="mx-auto max-w-site px-4 sm:px-6">
       <div class="grid gap-8 lg:grid-cols-2 lg:items-end">
         <div>

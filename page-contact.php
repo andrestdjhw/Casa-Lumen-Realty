@@ -88,7 +88,8 @@ get_header(); ?>
       array('title' => __('We follow up', 'casa-lumen'), 'text' => __('We reach out by phone or email, in the language you prefer.', 'casa-lumen')),
       array('title' => __('We plan the next step together', 'casa-lumen'), 'text' => __('A conversation about your goals, the process, and realistic next steps. No pressure.', 'casa-lumen')),
     ),
-    'class'   => 'bg-cream-50',
+    'class'   => 'tex tex-plaster bg-cream-50',
+    'image'   => 'hands.jpg',
   )); ?>
 
   <!-- Mapa (React, MapEmbed): se inserta solo con consentimiento de cookies. -->

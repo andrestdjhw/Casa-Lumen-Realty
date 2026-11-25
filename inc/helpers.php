@@ -39,3 +39,9 @@ function clr_image($file, $alt, $class = '', $eager = false, $sizes = '100vw') {
 
   return '<img src="' . esc_url(get_theme_file_uri('assets/images/' . $file)) . '"' . $srcset . ' alt="' . esc_attr($alt) . '" class="' . esc_attr($class) . '" loading="' . ($eager ? 'eager' : 'lazy') . '" decoding="async">';
 }
+
+/** Proporción "ancho / alto" de una imagen del tema, para reservar su espacio. */
+function clr_image_ratio($file) {
+  $size = @getimagesize(get_theme_file_path('assets/images/' . $file));
+  return $size ? $size[0] . ' / ' . $size[1] : '4 / 3';
+}

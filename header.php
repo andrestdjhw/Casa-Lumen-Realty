@@ -3,6 +3,14 @@
   <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Activa las animaciones antes de pintar (evita que el formulario del hero parpadee
+         antes de su entrada). Si el JS del tema no carga en 3 s, se quitan y todo queda visible. -->
+    <script>
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("js-motion");
+        setTimeout(function () { if (!window.clrMotionReady) document.documentElement.classList.remove("js-motion"); }, 3000);
+      }
+    </script>
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>

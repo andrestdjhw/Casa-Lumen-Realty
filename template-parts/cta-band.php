@@ -9,15 +9,15 @@
  *   @type string $body
  *   @type string $label  Texto del botón.
  *   @type string $href   Por defecto, la página de contacto.
- *   @type string $image  Por defecto cta-home.jpg.
+ *   @type string $image  Por defecto keys-door.jpg (llaves con el llavero de la marca).
  * }
  */
 
 $site = clr_site();
 ?>
 <section class="grid bg-navy-900 text-white lg:grid-cols-2">
-  <div class="relative min-h-[280px]">
-    <?php echo clr_image($args['image'] ?? 'cta-home.jpg', '', 'absolute inset-0 size-full object-cover', false, '(min-width: 1024px) 50vw, 100vw'); ?>
+  <div class="reveal-wipe relative min-h-[280px] overflow-hidden">
+    <?php echo clr_image($args['image'] ?? 'keys-door.jpg', '', 'absolute inset-0 size-full object-cover', false, '(min-width: 1024px) 50vw, 100vw'); ?>
   </div>
   <div class="relative px-4 py-16 sm:px-12 lg:py-20">
     <!-- Marco de plano (gráfico de apoyo de la marca) -->

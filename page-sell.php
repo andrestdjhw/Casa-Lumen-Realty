@@ -71,7 +71,7 @@ get_header(); ?>
       array('title' => __('Your next move', 'casa-lumen'), 'text' => __('Where you are going and when. Buying and selling at the same time takes coordination.', 'casa-lumen')),
       array('title' => __('Your goals', 'casa-lumen'), 'text' => __('What matters most to you: timing, price, convenience, or a balance of all three.', 'casa-lumen')),
     ),
-    'class'   => 'bg-cream-100',
+    'class'   => 'tex tex-plaster bg-cream-100',
   )); ?>
 
   <?php get_template_part('template-parts/lead', null, array(
@@ -91,6 +91,7 @@ get_header(); ?>
   )); ?>
 
   <?php get_template_part('template-parts/cta-band', null, array(
+    'image'   => 'keys-door.jpg',
     'eyebrow' => __('Not ready to list yet?', 'casa-lumen'),
     'body'    => __('A conversation now can help you plan repairs, timing, and next steps before you decide.', 'casa-lumen'),
     'label'   => __('Read Common Questions', 'casa-lumen'),
